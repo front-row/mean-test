@@ -16,14 +16,14 @@ export class BookListComponent implements OnInit {
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    //this.bookService.getBooks().then((books: Book[]) => {this.books = books});
+    this.bookService.getBooks().then((books: Book[]) => {this.books = books});
   }
 
   private getIndexOfBook = (bookId: string) => {
-    //return this.books.findIndex((book) => { return book._id === bookId});
+    return this.books.findIndex((book) => { return book._id === bookId});
   }
 
   selectBook(book: Book) {
-    //this.selectedBook = book;
+    this.selectedBook = book;
   }
 }
