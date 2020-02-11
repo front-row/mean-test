@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-    private contactsUrl = '/api/books';
+    private booksUrl = '/api/books';
 
-    constructor (private http: Http) {}
+    constructor (private http: HttpClient) {}
 
     getBooks(): Promise<void | Book[]> {
       return this.http.get(this.booksUrl)
                  .toPromise()
-                 .then(response => response.json() as Book[])
+                 .then(response => response as Book[])
                  .catch(this.handleError);
     }
 
-    // post("/api/contacts")
     createContact(newBook: Book): Promise<void | Book> {
       return this.http.post(this.booksUrl, newBook)
                  .toPromise()
-                 .then(response => response.json() as Book)
+                 .then(response => response as Book)
                  .catch(this.handleError);
     }
 
