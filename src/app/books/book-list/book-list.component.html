@@ -1,1 +1,13 @@
-<p>book-list works!</p>
+<div class="row">
+  <div class="col-md-5">
+    <h2>Books</h2>
+    <ul class="list-group">
+      <li class="list-group-item"
+        *ngFor="let book of books"
+        (click)="selectBook(book)"
+        [class.active]="book === selectedBook">
+        {{book.name}}
+      </li>
+    </ul>
+  </div>
+</div>

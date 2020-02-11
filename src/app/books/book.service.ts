@@ -6,7 +6,7 @@ import { Http, Response } from '@angular/http';
   providedIn: 'root'
 })
 export class BookService {
-    private contactsUrl = '/api/books';
+    private booksUrl = '/api/books';
 
     constructor (private http: Http) {}
 
@@ -17,8 +17,7 @@ export class BookService {
                  .catch(this.handleError);
     }
 
-    // post("/api/contacts")
-    createContact(newBook: Book): Promise<void | Book> {
+    createBook(newBook: Book): Promise<void | Book> {
       return this.http.post(this.booksUrl, newBook)
                  .toPromise()
                  .then(response => response.json() as Book)
