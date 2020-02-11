@@ -3,7 +3,7 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "contacts";
+var BOOKS_COLLECTION = "books";
 
 var app = express();
 app.use(bodyParser.json());
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 var db;
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", (err, client) => {
-  if (err) {
+  if(err) {
     console.log(err);
     process.exit(1);
   }
@@ -21,7 +21,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 
   var server = app.listen(process.env.PORT || 8080, () => {
     var port = server.address().port;
-    console.log("App now running on port", port);
+    console.log("App now running on port " + port);
   });
 });
 
