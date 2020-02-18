@@ -2,7 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 const Employee = require('./models/employees.js');
-const Product = require('./models/employees.js');
+const Product = require('./models/products.js');
+const CurrentUser = require('./models/currentUsers.js');
 
 var app = express();
 app.use(bodyParser.json());
@@ -76,17 +77,39 @@ app.post("addEmployee", (req, response) =>
 });
 
 
-//Update Record
-app.patch("/updateEmployee", (req, response) =>
+// Update Record
+app.put("/updateEmployee/:id", (req, response) =>
 {
-	if(err) 
-	{
-		handleError(response, err.message);
-	}
-	else
-	{
-		//Update
-	}
+	Employee.findById(req.params.id, (err, employee) => {
+		if (!employee)
+            return next(new Error("Could not load document!"));     // If no issue presented, throw error
+        else {
+            employee.firstName = req.body.firstName;                           // Else update all the data
+            employee.lastName = req.body.lastName;
+            employee.employeeID = req.body.employeeID;
+            employee.active = req.body.active;
+			employee.employeeType = req.body.employeeType;
+			employee.manages = req.body.manages;
+			employee.password = req.body.password;
+			employee.createdOn = req.body.createdOn;
+
+            employee.save().then(employee => {
+                res.json('Update done');
+            }).catch(err => {
+                handleError(response, err.message);
+            });
+        }
+	});
+		/*
+		if(err) 
+		{
+			handleError(response, err.message);
+		}
+		else
+		{
+			
+			//Update
+		}*/
 });
 
 //Signout
