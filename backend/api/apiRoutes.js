@@ -4,37 +4,12 @@ var mongodb = require("mongodb");
 const Employee = require('./models/employees.js');
 const Product = require('./models/employees.js');
 
-var EMPLOYEES_DB = "employees";
-
 var app = express();
 app.use(bodyParser.json());
 
 // Link to the dist angular build directory (for Heroku's sake)
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
-
-var db;
-
-Employee.findByID(object)
-
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", (err, client) =>
-{
-	if(err)
-	{
-		console.log(err);
-		process.exit(1);
-	}
-
-	db = client.db();
-	console.log("Database connection ready");
-
-	var server = app.listen(process.env.PORT || 8080, () =>
-	{
-		var port = server.address().port;
-		console.log("App now running on port " + port);
-	});
-});
-
 
 function handleError(response, message)
 {
@@ -44,9 +19,9 @@ function handleError(response, message)
 
 
 //Find All Employee
-app.get("/api/employee/ALL", (req, response) =>
+app.get("getEmployees", (req, response) =>
 {
-	db.collection(EMPLOYEES_DB).find({}).toArray((err, data) =>
+	Employee.find({}).toArray((err, data) =>
 	{
 		if(err) 
 		{
@@ -60,9 +35,9 @@ app.get("/api/employee/ALL", (req, response) =>
 });
 
 //Find One Employee
-app.get("/api/employee/ID", (req, response) =>
+app.get("getEmployee", (req, response) =>
 {
-	db.collection(EMPLOYEES_DB).find({req}).toArray((err, data) =>
+	Employee.find({req}).toArray((err, data) =>
 	{
 		if(err) 
 		{
@@ -76,7 +51,7 @@ app.get("/api/employee/ID", (req, response) =>
 });
 
 //Add Employee
-app.post("/api/employee", (req, response) =>
+app.post("addEmployee", (req, response) =>
 {
 	var NewEmployee = req.body;
 	NewEmployee.createDate = new Date();
@@ -102,7 +77,7 @@ app.post("/api/employee", (req, response) =>
 
 
 //Update Record
-app.patch("/employee", (req, response) =>
+app.patch("/updateEmployee", (req, response) =>
 {
 	if(err) 
 	{
@@ -115,7 +90,7 @@ app.patch("/employee", (req, response) =>
 });
 
 //Signout
-app.delete("/employee", (req, response) =>
+app.delete("/signout", (req, response) =>
 {
 	
 });
