@@ -1,27 +1,20 @@
-# MeanTest
+# Software Engineering Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
+# Setup
+Install NodeJS and NPM. If you want the heroku CLI tool you should install that for your system.
+If you want persistent storage while testing, install MongoDB.
+1. Clone this repo.
+2. Run `npm install` to install packages
+3. You can run the system with `npm start`.
+4. You can run it as Heroku will with `heroku local web` if you have the Heroku CLI tool installed.
 
-## Development server
+# Pushing to Heroku
+1. Add the heroku remote: `git remote add heroku https://git.heroku.com/young-shelf-19674.git`
+2. Create a new commit. If you amend a previous commit or don't commit, Heroku won't properly build the project.
+3. Push the commit: `git push heroku YOUR_BRANCH:master`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Project Structure
+Heroku wants the angular stuff to be at the project root, so that's where it is.
+The backend folder, `/backend`, contains (right now) `/api` and `/models` folders.
+The former is where actual functionality is implemented.
+The latter is where database schema can be defined.
