@@ -1,15 +1,5 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongodb = require("mongodb");
-const Employee = require('./models/employees.js');
-const Product = require('./models/employees.js');
-
-var app = express();
-app.use(bodyParser.json());
-
-// Link to the dist angular build directory (for Heroku's sake)
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+const Employee = require('../models/employees.js');
+const Product = require('../models/employees.js');
 
 function handleError(response, message)
 {
@@ -19,7 +9,7 @@ function handleError(response, message)
 
 
 //Find All Employee
-app.get("getEmployees", (req, response) =>
+function getAllEmployees(req, response)
 {
 	Employee.find({}).toArray((err, data) =>
 	{
@@ -32,10 +22,10 @@ app.get("getEmployees", (req, response) =>
 			response.status(200).json(data);
 		}
 	});
-});
+}
 
 //Find One Employee
-app.get("getEmployee", (req, response) =>
+function getEmployee(req, response)
 {
 	Employee.find({req}).toArray((err, data) =>
 	{
@@ -48,10 +38,10 @@ app.get("getEmployee", (req, response) =>
 			response.status(200).json(data);
 		}
 	});
-});
+}
 
 //Add Employee
-app.post("addEmployee", (req, response) =>
+function addEmployee(req, response)
 {
 	var NewEmployee = req.body;
 	NewEmployee.createDate = new Date();
@@ -73,11 +63,11 @@ app.post("addEmployee", (req, response) =>
 			}
 		});
 	}
-});
+}
 
 
 //Update Record
-app.patch("/updateEmployee", (req, response) =>
+function updateEmployee(req, response)
 {
 	if(err) 
 	{
@@ -87,10 +77,4 @@ app.patch("/updateEmployee", (req, response) =>
 	{
 		//Update
 	}
-});
-
-//Signout
-app.delete("/signout", (req, response) =>
-{
-	
-});
+}

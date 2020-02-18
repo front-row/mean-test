@@ -1,23 +1,22 @@
-//Mongooooooose
+// Set up Express
 var express = require("express");
-var bodyParser = require("body-parser");
-var apiRoutes = require("./backend/api/apiRoutes.js");
-
-// to connect to the db
-const db = require("./db.js") 
-
 var app = express();
-app.use(bodyParser.json());
-
-// Link to the dist angular build directory (for Heroku's sake)
+//// Link to the dist angular build directory (for Heroku's sake)
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
+//// Set up Routes
+var employeeRoutes = require("./backend/routes/employee.js");
+app.use('/employees', employeeRoutes);
 
-// use api routes
-app.use("/api", apiRoutes);
+// to connect to the db
+const db = require("./backend/db.js") 
+
+// Set up bodyParser
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 //Affirm connection to server
 app.listen(process.env.PORT || 8080, ()=>{
-  var port = app.address().port;
+  var port = process.env.PORT || 8080;
   console.log('Server started at port:'+port);
 })
