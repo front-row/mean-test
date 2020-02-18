@@ -1,10 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var APIRoutes = require("API/APIRoutes.js");
-var ObjectID = mongodb.ObjectID;
+var apiRoutes = require("./backend/api/apiRoutes.js");
 
-var BOOKS_COLLECTION = "books";
 
 var app = express();
 app.use(bodyParser.json());
@@ -36,6 +34,7 @@ function handleError(response, message) {
   res.status(500).json({"error": message});
 }
 
+app.use("/api", apiRoutes);
 
 app.get("/api/books", (req, response) => {
   db.collection(BOOKS_COLLECTION).find({}).toArray((err, data) => {
