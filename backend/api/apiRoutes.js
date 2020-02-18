@@ -1,7 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
-var ObjectID = mongodb.ObjectID;
+const Employee = require('./models/employees.js');
+const Product = require('./models/employees.js');
 
 var EMPLOYEES_DB = "employees";
 
@@ -13,6 +14,8 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 var db;
+
+Employee.findByID(object)
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", (err, client) =>
 {
@@ -38,6 +41,7 @@ function handleError(response, message)
 	console.log("ERROR: " + message);
 	res.status(500).json({"error": message});
 }
+
 
 //Find All Employee
 app.get("/api/employee/ALL", (req, response) =>
@@ -96,24 +100,22 @@ app.post("/api/employee", (req, response) =>
 	}
 });
 
+
 //Update Record
-app.patch("/api/employee", (req, response) =>
+app.patch("/employee", (req, response) =>
 {
-	//Search
+	if(err) 
 	{
-		if(err) 
-		{
-			handleError(response, err.message);
-		}
-		else
-		{
-			//Update
-		}
-	});
+		handleError(response, err.message);
+	}
+	else
+	{
+		//Update
+	}
 });
 
 //Signout
-app.delete("/api/employee", (req, response) =>
+app.delete("/employee", (req, response) =>
 {
 	
 });
