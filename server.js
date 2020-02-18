@@ -18,6 +18,6 @@ app.use("/api", apiRoutes);
 
 //Affirm connection to server
 app.listen(process.env.PORT || 8080, ()=>{
-  var port = server.address().port;
+  var port = app.address().port;
   console.log('Server started at port:'+port);
 })
