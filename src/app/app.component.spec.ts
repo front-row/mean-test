@@ -5,7 +5,12 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+		WelcomeComponent,
+		MainMenuComponent,
+		EmployeeDetailComponent,
+		ProductListingComponent,
+		ProductDetailComponent
       ],
     }).compileComponents();
   }));
