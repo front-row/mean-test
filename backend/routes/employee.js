@@ -10,17 +10,19 @@ router.get("/", (request, response) => {
 
 router.get("/:id", (request, response) => {
   console.log("GET api/employee/id");
-  employeeApi.getEmployee(request, response);
+  console.log(request.params);
+  employeeApi.getEmployee(request, response, request.params);
 });
 
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
-  employeeApi.addEmployee(req, response);
+  console.log(request.body);
+  employeeApi.addEmployee(request, response);
 });
 
 router.patch("/:id", (request, response) => {
   console.log("PATCH api/employee/");
-  employeeApi.updateEmployee(req, response);
+  employeeApi.updateEmployee(request, response);
 });
 
 module.exports = router;

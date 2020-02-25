@@ -25,9 +25,9 @@ module.exports = {
 	},
 
 	//Find One Employee
-	getEmployee: (req, response) =>
+	getEmployee: (req, response, params) =>
 	{
-		Employee.find({req}, (err, data) =>
+		Employee.findOne({employeeId: params.id}, (err, data) =>
 		{
 			if(err) 
 			{
@@ -47,7 +47,7 @@ module.exports = {
 		NewEmployee.createDate = new Date();
 		if (!req.body.name)
 		{
-			handleError(res, "Invalid input");
+			handleError(response, "Invalid input");
 		}
 		else
 		{
@@ -59,7 +59,7 @@ module.exports = {
 				}
 				else
 				{
-					res.status(201).json(data.ops[0]);
+					response.status(201).json(data.ops[0]);
 				}
 			});
 		}
@@ -89,7 +89,7 @@ module.exports = {
 
 				employee.save().then(employee =>
 				{
-					res.json('Update done');
+					response.json('Update done');
 				}).catch(err => {handleError(response, err.message);});
 			}
 		});
