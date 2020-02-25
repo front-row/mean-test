@@ -27,16 +27,14 @@ module.exports = {
 	//Find One Employee
 	getEmployee: (req, response, params) =>
 	{
-		Employee.findOne({employeeID: params.id}, (err, data) =>
+		Employee.findById(params.id, (err, employee) =>
 		{
 			if(err) 
 			{
 				handleError(response, err.message);
 			}
-			else
-			{
-				response.status(200).json(data);
-			}
+			response.status(200);
+			response.send(employee);
 		});
 	},
 
@@ -51,8 +49,10 @@ module.exports = {
 		var employee = new Employee(data);
 		employee.save((err, employee) => {
 			if(err) {
-				handleError(response, err.message);
+				response.status(400);
+				response.send('Bad request');
 			}
+			response.status(200);
 			response.send(employee);
 		});
 	},
@@ -61,29 +61,34 @@ module.exports = {
 	//Update Record
 	updateEmployee: (req, response) =>
 	{
-		Employee.findById(req.params.id, (err, employee) =>
-		{
-			if (!employee)
-			{
-				return next(new Error("Could not load document!")); // If no issue presented, throw error
-			}			
-			else
-			{
-				// Else update all the data
-				employee.firstName = req.body.firstName;                          
-				employee.lastName = req.body.lastName;
-				employee.employeeID = req.body.employeeID;
-				employee.active = req.body.active;
-				employee.employeeType = req.body.employeeType;
-				employee.manages = req.body.manages;
-				employee.password = req.body.password;
-				employee.createdOn = req.body.createdOn;
-
-				employee.save().then(employee =>
-				{
-					response.json('Update done');
-				}).catch(err => {handleError(response, err.message);});
+		Employee.findById(req.params.id, (err, employee) => {
+			if(!employee) {
+				handleError(response, err.message);
 			}
+			else {
+				for(const key of Object.keys(req.body)) {
+					employee[key] = req.body[key];
+				}
+				employee.save((err, employee) => {
+					if(err) {
+						response.status(400);
+						response.send('Bad request');
+					}
+					response.status(200);
+					response.send(employee);
+				});
+			}
+		});
+	},
+
+	// Delete record
+	deleteEmployee: (req, response) => {
+		Employee.deleteOne({employeeID: req.params.id}, (err, result) => {
+			if(err) {
+				handleError(response, err.message);
+			}
+			response.status(200);
+			response.send(result);
 		});
 	}
 };

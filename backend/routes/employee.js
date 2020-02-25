@@ -25,4 +25,9 @@ router.patch("/:id", (request, response) => {
   employeeApi.updateEmployee(request, response);
 });
 
+router.delete("/:id", (request, response) => {
+  console.log("DELETE api/employee/" + request.params.id);
+  employeeApi.deleteEmployee(request, response);
+});
+
 module.exports = router;
