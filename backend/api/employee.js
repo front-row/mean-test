@@ -27,7 +27,7 @@ module.exports = {
 	//Find One Employee
 	getEmployee: (req, response, params) =>
 	{
-		Employee.findOne({employeeId: params.id}, (err, data) =>
+		Employee.findOne({employeeID: params.id}, (err, data) =>
 		{
 			if(err) 
 			{
@@ -43,26 +43,18 @@ module.exports = {
 	//Add Employee
 	addEmployee: (req, response) =>
 	{
-		var NewEmployee = req.body;
-		NewEmployee.createDate = new Date();
-		if (!req.body.name)
-		{
-			handleError(response, "Invalid input");
+		var data = req.body;
+		if(! data.manages) {
+			data.manages = [];
 		}
-		else
-		{
-			db.collection(EMPLOYEES_DB).insertOne(NewEmployee, (err, data) =>
-			{
-				if(err)
-				{
-					handleError(res, err.message);
-				}
-				else
-				{
-					response.status(201).json(data.ops[0]);
-				}
-			});
-		}
+		data.createdOn = Date.now();
+		var employee = new Employee(data);
+		employee.save((err, employee) => {
+			if(err) {
+				handleError(response, err.message);
+			}
+			response.send(employee);
+		});
 	},
 
 
