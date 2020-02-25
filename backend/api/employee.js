@@ -1,5 +1,5 @@
 const Employee = require('../models/employees.js');
-const Product = require('../models/employees.js');
+const Product = require('../models/products.js');
 
 function handleError(response, message)
 {
@@ -11,7 +11,7 @@ module.exports = {
 	//Find All Employee
 	getAllEmployees: (req, response) =>
 	{
-		Employee.find({}, function(err, data)) =>
+		Employee.find({}, (err, data)) =>
 		{
 			if(err) 
 			{
@@ -27,7 +27,7 @@ module.exports = {
 	//Find One Employee
 	getEmployee: (req, response) =>
 	{
-		Employee.find({req}, function(err, data)) =>
+		Employee.find({req}, (err, data)) =>
 		{
 			if(err) 
 			{
@@ -66,7 +66,7 @@ module.exports = {
 	},
 
 
-	//Update Record
+	//Update Employee
 	updateEmployee: (req, response) =>
 	{
 		Employee.findById(req.params.id, (err, employee) =>
@@ -74,7 +74,7 @@ module.exports = {
 			if (!employee)
 			{
 				return next(new Error("Could not load document!")); // If no issue presented, throw error
-			}			
+			}
 			else
 			{
 				// Else update all the data
