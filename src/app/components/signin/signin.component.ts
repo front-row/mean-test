@@ -3,8 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
 export class SignInComponent {
   signInForm = new FormGroup({
