@@ -11,7 +11,11 @@ module.exports = {
 	//Find All Employee
 	getAllEmployees: (req, response) =>
 	{
+<<<<<<< HEAD
 		Employee.find({}, (err, data)) =>
+=======
+		Employee.find({}, (err, data) =>
+>>>>>>> 6822d3e713dbb188f18286d7a7e0efe586d505a5
 		{
 			if(err) 
 			{
@@ -27,7 +31,11 @@ module.exports = {
 	//Find One Employee
 	getEmployee: (req, response) =>
 	{
+<<<<<<< HEAD
 		Employee.find({req}, (err, data)) =>
+=======
+		Employee.find({req}, (err, data) =>
+>>>>>>> 6822d3e713dbb188f18286d7a7e0efe586d505a5
 		{
 			if(err) 
 			{
