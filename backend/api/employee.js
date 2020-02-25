@@ -11,7 +11,7 @@ module.exports = {
 	//Find All Employee
 	getAllEmployees: (req, response) =>
 	{
-		Employee.find({}, function(err, data)) =>
+		Employee.find({}, (err, data) =>
 		{
 			if(err) 
 			{
@@ -27,7 +27,7 @@ module.exports = {
 	//Find One Employee
 	getEmployee: (req, response) =>
 	{
-		Employee.find({req}, function(err, data)) =>
+		Employee.find({req}, (err, data) =>
 		{
 			if(err) 
 			{
