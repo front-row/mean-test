@@ -15,8 +15,8 @@
     "@angular/animations": "~9.0.0",
     "@angular/cli": "^9.0.1",
     "@angular/common": "~9.0.0",
-    "@angular/compiler-cli": "^9.0.0",
     "@angular/compiler": "~9.0.0",
+    "@angular/compiler-cli": "^9.0.0",
     "@angular/core": "~9.0.0",
     "@angular/forms": "~9.0.0",
     "@angular/http": "^7.2.16",
@@ -26,6 +26,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.2",
+    "mongoose": "^5.9.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
