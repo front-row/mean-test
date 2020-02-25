@@ -6,7 +6,7 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 //// Set up Routes
 var employeeRoutes = require("./backend/routes/employee.js");
-app.use('/employees', employeeRoutes);
+app.use('/api/employee', employeeRoutes);
 
 // to connect to the db
 const db = require("./backend/db.js") 

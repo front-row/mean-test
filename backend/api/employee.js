@@ -4,7 +4,7 @@ const Product = require('../models/employees.js');
 function handleError(response, message)
 {
 	console.log("ERROR: " + message);
-	res.status(500).json({"error": message});
+	response.status(500).json({"error": message});
 }
 
 module.exports = {
