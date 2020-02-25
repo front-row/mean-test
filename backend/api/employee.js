@@ -69,13 +69,29 @@ module.exports = {
 	//Update Record
 	updateEmployee: (req, response) =>
 	{
-		if(err) 
+		Employee.findById(req.params.id, (err, employee) =>
 		{
-			handleError(response, err.message);
-		}
-		else
-		{
-			//Update
-		}
-	},
+			if (!employee)
+			{
+				return next(new Error("Could not load document!")); // If no issue presented, throw error
+			}			
+			else
+			{
+				// Else update all the data
+				employee.firstName = req.body.firstName;                          
+				employee.lastName = req.body.lastName;
+				employee.employeeID = req.body.employeeID;
+				employee.active = req.body.active;
+				employee.employeeType = req.body.employeeType;
+				employee.manages = req.body.manages;
+				employee.password = req.body.password;
+				employee.createdOn = req.body.createdOn;
+
+				employee.save().then(employee =>
+				{
+					res.json('Update done');
+				}).catch(err => {handleError(response, err.message);});
+			}
+		});
+	}
 };
