@@ -1,5 +1,4 @@
 const Employee = require('../models/employees.js');
-const Product = require('../models/employees.js');
 
 function handleError(response, message)
 {
@@ -58,7 +57,7 @@ module.exports = {
 	},
 
 
-	//Update Record
+	//Update Employee
 	updateEmployee: (req, response) =>
 	{
 		Employee.findById(req.params.id, (err, employee) => {
