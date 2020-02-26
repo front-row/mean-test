@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const Employee = require('../models/employees.js');
 var employeeApi = require('../api/employee.js');
 
 router.get("/", (request, response) => {
@@ -13,9 +13,10 @@ router.get("/:id", (request, response) => {
   employeeApi.getEmployee(request, response);
 });
 
+
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
-  employeeApi.addEmployee(req, response);
+  employeeApi.addEmployee(request, response);
 });
 
 router.patch("/:id", (request, response) => {
