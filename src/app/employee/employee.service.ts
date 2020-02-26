@@ -25,6 +25,13 @@ export class EmployeeService {
                .catch(this.handleError);
   }
 
+  addEmployee(employee: Employee): Promise<void | Employee> {
+    return this.http.post(this.apiUrl, employee)
+               .toPromise()
+               .then(response => response as Employee)
+               .catch(this.handleError);
+  }
+
   private handleError (error: any) {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';

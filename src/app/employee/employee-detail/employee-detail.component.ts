@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
@@ -10,14 +11,35 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeDetailComponent implements OnInit {
   employee: Employee;
+  employeeDetailsForm: FormGroup;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(
+    private employeeService: EmployeeService,
+    private formBuilder: FormBuilder
+    ) { 
+      this.employeeDetailsForm = this.formBuilder.group({
+        firstName: '',
+        lastName: '',
+        password: '',
+        verifyPassword: '',
+        employeeType: '',
+        displayId: null
+      });
+  }
 
   ngOnInit(): void {
-    this.employeeService.getEmployee("5e55b23ac4625a2418026698")
-      .then((employee: Employee) => {
-        this.employee = employee;
-        console.log(this.employee);
-      });
+
+  }
+
+  onSubmit(employeeData) {
+    var e = new Employee();
+    e.firstName = employeeData.firstName;
+    e.lastName = employeeData.lastName;
+    e.employeeType = employeeData.employeeType;
+    e.password = employeeData.password;
+    e.displayId = employeeData.displayId;
+    if(employeeData.password == employeeData.verifyPassword) {
+      this.employeeService.addEmployee(e);
+    }
   }
 }
