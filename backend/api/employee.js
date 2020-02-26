@@ -16,10 +16,8 @@ module.exports = {
 			{
 				handleError(response, err.message);
 			}
-			else
-			{
-				response.status(200).json(data);
-			}
+			response.status(200);
+			response.send(data);
 		});
 	},
 
@@ -40,16 +38,10 @@ module.exports = {
 	//Add Employee
 	addEmployee: (req, response) =>
 	{
-		var data = req.body;
-		if(! data.manages) {
-			data.manages = [];
-		}
-		data.createdOn = Date.now();
-		var employee = new Employee(data);
+		var employee = new Employee(req.body);
 		employee.save((err, employee) => {
 			if(err) {
-				response.status(400);
-				response.send('Bad request');
+				handleError(response, err.message);
 			}
 			response.status(200);
 			response.send(employee);
@@ -70,8 +62,7 @@ module.exports = {
 				}
 				employee.save((err, employee) => {
 					if(err) {
-						response.status(400);
-						response.send('Bad request');
+						handleError(response, err.message);
 					}
 					response.status(200);
 					response.send(employee);

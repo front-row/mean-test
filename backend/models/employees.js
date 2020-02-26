@@ -27,6 +27,15 @@ const EmployeeSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    isInitialEmployee: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    managerId: {
+        type: mongoose.ObjectId,
+        default: null
+    },
     createdOn:{
         type: Date,
         required: true,
