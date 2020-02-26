@@ -9,13 +9,10 @@ const EmployeeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    employeeID:{
-        type: Number,
-        required: true
-    },
     active:{
       type: Boolean,
-      required: true
+      required: true,
+      default: true
     },
     employeeType:{
         type: String,
@@ -23,7 +20,8 @@ const EmployeeSchema = mongoose.Schema({
     },
     manages:{ // array of IDs of employees this person manages
         type: Array,
-        required: true
+        required: true,
+        default: []
     },
     password:{
         type: String,
@@ -31,9 +29,9 @@ const EmployeeSchema = mongoose.Schema({
     },
     createdOn:{
         type: Date,
-        required: true
+        required: true,
+        default: Date.now()
     }
-    
 });
 
 const Employee = module.exports = mongoose.model('Employee', EmployeeSchema);

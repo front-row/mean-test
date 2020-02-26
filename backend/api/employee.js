@@ -82,7 +82,7 @@ module.exports = {
 
 	// Delete record
 	deleteEmployee: (req, response) => {
-		Employee.deleteOne({employeeID: req.params.id}, (err, result) => {
+		Employee.deleteOne({_id: req.params.id}, (err, result) => {
 			if(err) {
 				handleError(response, err.message);
 			}
