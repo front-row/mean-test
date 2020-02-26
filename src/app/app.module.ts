@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksModule } from './books/books.module';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -22,7 +24,10 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
   imports: [
     BrowserModule,
     HttpClientModule,
-    BooksModule
+    BooksModule,
+	AppRoutingModule,
+	BrowserModule,
+	BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
