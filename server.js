@@ -7,9 +7,15 @@ app.use(express.static(distDir));
 //// Set up bodyParser
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
+//// Set up CORS allowance (so we can test angular locally)
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+})
 //// Set up Routes
 var employeeRoutes = require("./backend/routes/employee.js");
 app.use('/api/employee', employeeRoutes);
+
 
 // to connect to the db
 const db = require("./backend/db.js") 

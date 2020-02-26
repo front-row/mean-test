@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksModule } from './books/books.module';
+import { EmployeeModule } from './employee/employee.module';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
@@ -25,6 +26,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     BrowserModule,
     HttpClientModule,
     BooksModule,
+    EmployeeModule,
 	AppRoutingModule,
 	BrowserModule,
 	BrowserAnimationsModule
