@@ -1,10 +1,9 @@
 const Employee = require('../models/employees.js');
-const Product = require('../models/employees.js');
 
 function handleError(response, message)
 {
 	console.log("ERROR: " + message);
-	res.status(500).json({"error": message});
+	response.status(500).json({"error": message});
 }
 
 module.exports = {
@@ -25,18 +24,16 @@ module.exports = {
 	},
 
 	//Find One Employee
-	getEmployee: (req, response) =>
+	getEmployee: (req, response, params) =>
 	{
-		Employee.find({req}, (err, data) =>
+		Employee.findById(params.id, (err, employee) =>
 		{
 			if(err) 
 			{
 				handleError(response, err.message);
 			}
-			else
-			{
-				response.status(200).json(data);
-			}
+			response.status(200);
+			response.send(employee);
 		});
 	},
 
@@ -61,7 +58,7 @@ module.exports = {
 	},
 
 
-	//Update Record
+	//Update Employee
 	updateEmployee: (req, response) =>
 	{
 		Employee.findById(req.params.id, (err, employee) => {
