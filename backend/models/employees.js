@@ -18,6 +18,11 @@ const EmployeeSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    displayId:{
+        type: Number,
+        required: true,
+        unique: true
+    },
     manages:{ // array of IDs of employees this person manages
         type: Array,
         required: true,
