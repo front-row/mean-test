@@ -16,6 +16,7 @@ const EmployeeSchema = mongoose.Schema({
     },
     employeeType:{
         type: String,
+        enum: ['General Manager', 'Shift Manager', 'Cashier'],
         required: true
     },
     displayId:{

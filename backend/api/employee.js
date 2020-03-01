@@ -35,6 +35,19 @@ module.exports = {
 		});
 	},
 
+	isEmployeeManager: (req, response) =>
+	{
+		Employee.findById(req.params.id, (err, employee) =>
+		{
+			if(err)
+			{
+				handleError(response, err.message);
+			}
+			response.status(200);
+			response.send(employee.employeeType === 'General Manager' || employee.employeeType === 'Shift Manager');
+		});
+	},
+
 	//Add Employee
 	addEmployee: (req, response) =>
 	{
