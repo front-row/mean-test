@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const Employee = require('../models/employees.js');
 var employeeApi = require('../api/employee.js');
 
 router.get("/", (request, response) => {
@@ -9,15 +8,17 @@ router.get("/", (request, response) => {
 });
 
 router.get("/:id", (request, response) => {
-  console.log("GET api/employee/id");
-  console.log(request.params);
+  console.log("GET api/employee/" + request.params.id);
   employeeApi.getEmployee(request, response, request.params);
 });
 
+router.get("/:id/isManager", (request, response) => {
+  console.log("GET api/employee/"+request.params.id+"/isManager");
+  employeeApi.isEmployeeManager(request, response);
+})
 
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
-  console.log(request.body);
   employeeApi.addEmployee(request, response);
 });
 

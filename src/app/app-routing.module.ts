@@ -14,6 +14,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'welcome',
+    component: WelcomeComponent
+  },
+  {
     path: 'mainmenu',
     component: MainMenuComponent
   },
