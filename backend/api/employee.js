@@ -43,6 +43,11 @@ module.exports = {
 			{
 				handleError(response, err.message);
 			}
+			if(!employee) {
+				response.status(404);
+				response.send();
+				return;
+			}
 			response.status(200);
 			response.send(employee.employeeType === 'General Manager' || employee.employeeType === 'Shift Manager');
 		});

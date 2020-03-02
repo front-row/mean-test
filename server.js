@@ -1,9 +1,11 @@
 // Set up Express
 var express = require("express");
 var app = express();
+
 //// Link to the dist angular build directory (for Heroku's sake)
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
+
 //// Set up bodyParser
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());

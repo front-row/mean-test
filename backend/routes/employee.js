@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var employeeApi = require('../api/employee.js');
 
 router.get("/", (request, response) => {
@@ -20,7 +19,6 @@ router.get("/:id/isManager", (request, response) => {
 
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
-  console.log(request.body);
   employeeApi.addEmployee(request, response);
 });
 

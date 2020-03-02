@@ -82,5 +82,16 @@ module.exports = {
 			response.status(200);
 			response.send(result);
 		});
+	},
+
+	// Delete product
+	deleteProduct: (req, response) => {
+		Product.deleteOne({productID: req.params.id}, (err, result) => {
+			if(err) {
+				handleError(response, err.message);
+			}
+			response.status(200);
+			response.send(result);
+		});
 	}
 };

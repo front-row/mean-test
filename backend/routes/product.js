@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var productApi = require('../api/product.js');
 
 router.get("/", (request, response) => {
