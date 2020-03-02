@@ -11,10 +11,12 @@ export class SignInComponent {
     username: new FormControl(''),
     psswd: new FormControl(''),
   });
+
+
+  onSubmit() 
+  {
+    // TODO: Actually make this do a POST request I guess
+    console.log("Congrats this does nothing yet");
+  }
 }
 
-onSubmit() 
-{
-  // TODO: Actually make this do a POST request I guess
-  console.alert("Congrats this does nothing yet");
-}
