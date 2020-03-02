@@ -18,28 +18,15 @@ module.exports = {
 	//Add Product
 	addProduct: (req, response) =>
 	{
-		var NewProduct = req.body;
-		NewProduct.createDate = new Date();
-		if (!req.body.name)
-		{
-			handleError(res, "Invalid input");
-		}
-		else
-		{
-			db.collection(PRODUCTS_DB).insertOne(NewProduct, (err, data) =>
-			{
-				if(err)
-				{
-					handleError(res, err.message);
-				}
-				else
-				{
-					res.status(201).json(data.ops[0]);
-				}
-			});
-		}
+		var product = new Product(req.body);
+		product.save((err, product) => {
+			if(err) {
+				handleError(response, err.message);
+			}
+			response.status(200);
+			response.send(product);
+		})
 	},
-
 
 	//Update Product
 	updateProduct: (req, response) =>

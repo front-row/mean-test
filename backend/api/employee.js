@@ -14,6 +14,24 @@ module.exports = {
 		Employee.findById(params.id, util.handleQuery(response));
 	},
 
+	isEmployeeManager: (req, response) =>
+	{
+		Employee.findById(req.params.id, (err, employee) =>
+		{
+			if(err)
+			{
+				handleError(response, err.message);
+			}
+			if(!employee) {
+				response.status(404);
+				response.send();
+				return;
+			}
+			response.status(200);
+			response.send(employee.employeeType === 'General Manager' || employee.employeeType === 'Shift Manager');
+		});
+	},
+
 	//Add Employee
 	addEmployee: (req, response) =>
 	{

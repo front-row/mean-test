@@ -12,6 +12,10 @@ router.get("/:id", (request, response) => {
   employeeApi.getEmployee(request, response, request.params);
 });
 
+router.get("/:id/isManager", (request, response) => {
+  console.log("GET api/employee/"+request.params.id+"/isManager");
+  employeeApi.isEmployeeManager(request, response);
+})
 
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
