@@ -88,5 +88,16 @@ module.exports = {
 				}).catch(err => {handleError(response, err.message);});
 			}
 		});
+	},
+
+	// Delete product
+	deleteProduct: (req, response) => {
+		Product.deleteOne({productID: req.params.id}, (err, result) => {
+			if(err) {
+				handleError(response, err.message);
+			}
+			response.status(200);
+			response.send(result);
+		});
 	}
 };

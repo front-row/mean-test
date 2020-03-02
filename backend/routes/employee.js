@@ -17,10 +17,7 @@ router.get("/:id", (request, response) => {
 
 router.post("/", (request, response) => {
   console.log("POST api/employee/");
-<<<<<<< HEAD
-=======
   console.log(request.body);
->>>>>>> 76d862651de93430ba4acde5da0191715b88a4d1
   employeeApi.addEmployee(request, response);
 });
 
