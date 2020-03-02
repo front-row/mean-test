@@ -8,8 +8,7 @@ router.get("/", (request, response) => {
 });
 
 router.get("/:id", (request, response) => {
-  console.log("GET api/employee/id");
-  console.log(request.params);
+  console.log("GET api/employee/" + request.params.id);
   employeeApi.getEmployee(request, response, request.params);
 });
 

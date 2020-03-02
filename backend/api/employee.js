@@ -1,44 +1,20 @@
 const Employee = require('../models/employees.js');
-
-function handleError(response, message)
-{
-	console.log("ERROR: " + message);
-	response.status(500).json({"error": message});
-}
+const util = require('../util.js');
 
 module.exports = {
 	//Find All Employee
 	getAllEmployees: (req, response) =>
 	{
-		Employee.find({}, (err, data) =>
-		{
-			if(err) 
-			{
-				handleError(response, err.message);
-			}
-			else
-			{
-				response.status(200).json(data);
-			}
-		});
+		Employee.find({}, util.handleQuery(response));
 	},
 
 	//Find One Employee
 	getEmployee: (req, response, params) =>
 	{
-		Employee.findById(params.id, (err, employee) =>
-		{
-			if(err) 
-			{
-				handleError(response, err.message);
-			}
-			response.status(200);
-			response.send(employee);
-		});
+		Employee.findById(params.id, util.handleQuery(response));
 	},
 
 	//Add Employee
-	
 	addEmployee: (req, response) =>
 	{
 		var data = req.body;
@@ -47,48 +23,18 @@ module.exports = {
 		}
 		data.createdOn = Date.now();
 		var employee = new Employee(data);
-		employee.save((err, employee) => {
-			if(err) {
-				response.status(400);
-				response.send('Bad request');
-			}
-			response.status(200);
-			response.send(employee);
-		});
+		employee.save(util.handleQuery(response));
 	},
 
 
 	//Update Employee
 	updateEmployee: (req, response) =>
 	{
-		Employee.findById(req.params.id, (err, employee) => {
-			if(!employee) {
-				handleError(response, err.message);
-			}
-			else {
-				for(const key of Object.keys(req.body)) {
-					employee[key] = req.body[key];
-				}
-				employee.save((err, employee) => {
-					if(err) {
-						response.status(400);
-						response.send('Bad request');
-					}
-					response.status(200);
-					response.send(employee);
-				});
-			}
-		});
+		Employee.findByIdAndUpdate(req.params.id, req.body, util.handleQuery(response));
 	},
 
 	// Delete record
 	deleteEmployee: (req, response) => {
-		Employee.deleteOne({employeeID: req.params.id}, (err, result) => {
-			if(err) {
-				handleError(response, err.message);
-			}
-			response.status(200);
-			response.send(result);
-		});
+		Employee.deleteOne({employeeID: req.params.id}, util.handleQuery(response));
 	}
 };

@@ -9,8 +9,7 @@ router.get("/", (request, response) => {
 });
 
 router.get("/:id", (request, response) => {
-  console.log("GET api/product/id");
-  console.log(request.params);
+  console.log("GET api/product/id" + request.params.id);
   employeeApi.getProduct(request, response, request.params);
 });
 
