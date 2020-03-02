@@ -18,6 +18,8 @@ var employeeRoutes = require("./backend/routes/employee.js");
 app.use('/api/employee', employeeRoutes);
 var productRoutes = require("./backend/routes/product.js");
 app.use('/api/product', productRoutes);
+var signInRoutes = require("./backend/routes/activeUser.js");
+app.use('/api/auth', signInRoutes);
 
 
 // to connect to the db

@@ -19,7 +19,7 @@ const EmployeeSchema = mongoose.Schema({
         enum: ['General Manager', 'Shift Manager', 'Cashier'],
         required: true
     },
-    displayId:{
+    employeeId:{
         type: Number,
         required: true,
         unique: true
