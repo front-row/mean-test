@@ -10,7 +10,7 @@ module.exports = {
 	//Find All Employee
 	getAllEmployees: (req, response) =>
 	{
-		Employee.find({}, (err, data) =>
+		Employee.find((err, data) =>
 		{
 			if(err) 
 			{
