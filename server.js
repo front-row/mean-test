@@ -16,6 +16,8 @@ app.use(function(req, res, next) {
 //// Set up Routes
 var employeeRoutes = require("./backend/routes/employee.js");
 app.use('/api/employee', employeeRoutes);
+var productRoutes = require("./backend/routes/product.js");
+app.use('/api/product', productRoutes);
 
 
 // to connect to the db

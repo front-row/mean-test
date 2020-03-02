@@ -10,9 +10,10 @@ const ProductSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    LookupCode:{
+    lookupCode:{
         type: Number,
-        required: true
+        required: true,
+        unique: true
     }
 });
 
