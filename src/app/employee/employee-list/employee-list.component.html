@@ -1,0 +1,15 @@
+<h1>Employees</h1>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Employee ID</th>
+        <th>Type</th>
+        <th>Internal ID</th>
+    </thead>
+    <tr *ngFor="let employee of employees">
+        <td>{{employee.firstName}} {{employee.lastName}}</td>
+        <td>{{employee.displayId}}</td>
+        <td>{{employee.employeeType}}</td>
+        <td>{{employee._id}}</td>
+    </tr>
+</table>

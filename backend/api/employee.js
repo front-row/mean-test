@@ -16,10 +16,8 @@ module.exports = {
 			{
 				handleError(response, err.message);
 			}
-			else
-			{
-				response.status(200).json(data);
-			}
+			response.status(200);
+			response.send(data);
 		});
 	},
 
@@ -37,20 +35,31 @@ module.exports = {
 		});
 	},
 
+	isEmployeeManager: (req, response) =>
+	{
+		Employee.findById(req.params.id, (err, employee) =>
+		{
+			if(err)
+			{
+				handleError(response, err.message);
+			}
+			if(!employee) {
+				response.status(404);
+				response.send();
+				return;
+			}
+			response.status(200);
+			response.send(employee.employeeType === 'General Manager' || employee.employeeType === 'Shift Manager');
+		});
+	},
+
 	//Add Employee
-	
 	addEmployee: (req, response) =>
 	{
-		var data = req.body;
-		if(! data.manages) {
-			data.manages = [];
-		}
-		data.createdOn = Date.now();
-		var employee = new Employee(data);
+		var employee = new Employee(req.body);
 		employee.save((err, employee) => {
 			if(err) {
-				response.status(400);
-				response.send('Bad request');
+				handleError(response, err.message);
 			}
 			response.status(200);
 			response.send(employee);
@@ -71,8 +80,7 @@ module.exports = {
 				}
 				employee.save((err, employee) => {
 					if(err) {
-						response.status(400);
-						response.send('Bad request');
+						handleError(response, err.message);
 					}
 					response.status(200);
 					response.send(employee);
@@ -83,7 +91,7 @@ module.exports = {
 
 	// Delete record
 	deleteEmployee: (req, response) => {
-		Employee.deleteOne({employeeID: req.params.id}, (err, result) => {
+		Employee.deleteOne({_id: req.params.id}, (err, result) => {
 			if(err) {
 				handleError(response, err.message);
 			}
