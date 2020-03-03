@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'product-detail-t',
@@ -17,7 +17,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.productDetailsForm = this.formBuilder.group({
@@ -45,14 +46,29 @@ export class ProductDetailComponent implements OnInit {
     p.count = productData.count;
     p.lookupCode = productData.lookupCode;
     if(this.id) {
-      this.productService.updateProduct(this.id, p);
+      this.productService.updateProduct(this.id, p)
+        .then((result) => {
+          if(result) {
+            this.router.navigate(['/products']);
+          }
+        });
     }
     else {
-      this.productService.addProduct(p);
+      this.productService.addProduct(p)
+        .then((result) => {
+          if(result) {
+            this.router.navigate(['/products']);
+          }
+        })
     }
   }
 
   deleteClicked() {
-    this.productService.deleteProduct(this.id);
+    this.productService.deleteProduct(this.id)
+      .then((result) => {
+        if(result) {
+          this.router.navigate(['/products']);
+        }
+      })
   }
 }
