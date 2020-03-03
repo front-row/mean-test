@@ -1,6 +1,6 @@
 const ActiveUser = require("../models/activeUser.js");
 const Employee = require("../models/employees.js");
-var session = require('express-session')
+var session = require('express-session');
 
 function handleError(response, message)
 {
