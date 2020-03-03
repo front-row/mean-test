@@ -1,6 +1,6 @@
-<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
-	<label> Username: <input type="text" formControlName="username"> </label>
-	<label> Password: <input type="password" formControlName="psswd"> </label>
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit(signInForm.value)">
+	<label> Employee ID: <input type="number" formControlName="id"> </label><br>
+	<label> Password: <input type="password" formControlName="password"> </label><br>
 	<button type="submit" [disabled]="!signInForm.valid">Sign In</button>
 </form>
 	
