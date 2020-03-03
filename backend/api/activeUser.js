@@ -58,7 +58,7 @@ module.exports = {
 	},
 	
 	signOut: (request, response) => {
-		request.session.destroy((err) {});
+		request.session.destroy((err) => {});
 		ActiveUser.deleteOne({employeeID: request.body.employeeId}, (err, activeUser) => {
 			if(err) {
 				util.handleError(response, err.message);
@@ -69,7 +69,7 @@ module.exports = {
 	isLoggedIn: (sessionId, response) => {
 		ActiveUser.findById(sessionId, (err, data) => {
 			if(err) {
-				util.handleError(res, serr.message);
+				util.handleError(response, err.message);
 			}
 			else {
 				response.status(200).send(data.length > 0);

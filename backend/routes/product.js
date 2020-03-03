@@ -7,7 +7,7 @@ router.get("/", (request, response) => {
   productApi.getAllProducts(request, response);
 });
 
-router.get("/", (request, response) => {
+router.get("/:id", (request, response) => {
   console.log("GET api/product/" + request.params.id);
   productApi.getProduct(request, response, request.params);
 });
@@ -17,12 +17,12 @@ router.post("/", (request, response) => {
   productApi.addProduct(request, response);
 });
 
-router.patch("/", (request, response) => {
+router.patch("/:id", (request, response) => {
   console.log("PATCH api/product/" + request.params.id);
   productApi.updateProduct(request, response);
 });
 
-router.delete("/", (request, response) => {
+router.delete("/:id", (request, response) => {
   console.log("DELETE api/product/" + request.params.id);
   productApi.deleteProduct(request, response);
 });

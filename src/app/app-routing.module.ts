@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router'
 import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
-import { ProductListingComponent } from './components/product-listing/product-listing.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductListingComponent } from './product/product-listing/product-listing.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -26,11 +26,15 @@ const routes: Routes = [
     component: EmployeeDetailComponent
   },
   {
-    path: 'productlisting',
+    path: 'products',
     component: ProductListingComponent
   },
   {
-    path: 'productdetail',
+    path: 'productdetails',
+    component: ProductDetailComponent
+  },
+  {
+    path: 'productdetails/:id',
     component: ProductDetailComponent
   }
 ];
