@@ -19,6 +19,7 @@ export class SigninComponent implements OnInit{
     password: new FormControl(''),
   });
 
+  
   constructor(
     private employeeService: EmployeeService,
     private activatedRoute: ActivatedRoute,
@@ -26,10 +27,14 @@ export class SigninComponent implements OnInit{
     private http: HttpClient
   ){}
 
+  noEmployeeID = false;
+  noPassword = false;
+  incorrectPassword = false;
+  
+
   ngOnInit(): void {  
     this.employeeService.getEmployees()
       .then((employees: Employee[]) => {
-        debugger;
         if(employees.length == 0) {
           this.router.navigate(['employeedetails', 'isInitial']);
         }
@@ -46,13 +51,33 @@ export class SigninComponent implements OnInit{
 
   onSubmit(loginData) 
   {
+
+    this.noEmployeeID = false;
+    this.noPassword = false;
+    this.incorrectPassword = false;
+
+    if(!loginData.employeeId){
+      this.noEmployeeID = true;
+      return;
+    }
+
+    if(!loginData.password){
+      this.noPassword = true;
+      return;
+    }
+
     let login = {};
     login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
     return this.http.post(this.apiUrl + '/signIn', login)
       .subscribe((response: Response) => {
         console.log(response);
+
+        if(response){
           this.router.navigate(['mainmenu']);
+        } else {
+          this.incorrectPassword = true;
+        }
       });
   }
 }
