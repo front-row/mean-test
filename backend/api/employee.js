@@ -67,5 +67,10 @@ module.exports = {
 	getEmployeeById: (req, response, params) =>
 	{
 		Employee.findOne({employeeId: params.employeeId}, util.handleQuery(response));
+	},
+
+	deleteAll: (request, response) =>
+	{
+		Employee.deleteMany({}, util.handleQuery(response));
 	}
 };

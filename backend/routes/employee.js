@@ -32,4 +32,9 @@ router.delete("/", (request, response) => {
   employeeApi.deleteEmployee(request, response);
 });
 
+router.delete("/debug/all", (request, response) => {
+  console.log("DELETE /api/employee/debug/all");
+  employeeApi.deleteAll(request, response);
+})
+
 module.exports = router;
