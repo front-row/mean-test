@@ -10,8 +10,6 @@ import { EmployeeModule } from './employee/employee.module';
 import { ProductModule } from './product/product.module';
 import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { ProductListingComponent } from './components/product-listing/product-listing.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 @NgModule({
@@ -19,8 +17,6 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     AppComponent,
 	  SigninComponent,
     MainMenuComponent,
-    ProductListingComponent,
-    ProductDetailComponent,
     SigninComponent,
     PageHeaderComponent
   ],
