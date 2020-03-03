@@ -15,3 +15,5 @@ mongoose.connection.on('error', (err)=>{
         console.log('Error in Database connection: '+err);
     }
 });
+
+module.exports = mongoose.connection;
