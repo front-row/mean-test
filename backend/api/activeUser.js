@@ -51,6 +51,12 @@ module.exports = {
 		});
 	},
 	
+	//Find One Active Employee By employeeID
+	getActiveEmployee: (request, response, params) =>
+	{
+		Employee.find({employeeID: params.employeeID}, util.handleQuery(response));
+	},
+	
 	signOut: (request, response) => {
 		request.session.destroy((err) {});
 		ActiveUser.deleteOne({employeeID: request.body.employeeId}, (err, activeUser) => {
