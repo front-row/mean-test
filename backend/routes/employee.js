@@ -7,18 +7,13 @@ router.get("/", (request, response) => {
   employeeApi.getAllEmployees(request, response);
 });
 
-router.get("/:id", (request, response) => {
-  console.log("GET api/employee/" + request.params.id);
-  employeeApi.getEmployee(request, response, request.params);
-});
-
-router.get("/:employeeId", (request, response) => {
-  console.log("GET api/employee/byId/" + request.params.employeeId);
+router.get("/getCurrent", (request, response) => {
+  console.log("GET api/employee/getCurrent");
   employeeApi.getEmployeeById(request, response, request.params);
 });
 
 router.get("/isManager", (request, response) => {
-  console.log("GET api/employee/"+request.params.id+"/isManager");
+  console.log("GET api/employee/isManager");
   employeeApi.isEmployeeManager(request, response);
 })
 
@@ -27,13 +22,13 @@ router.post("/", (request, response) => {
   employeeApi.addEmployee(request, response);
 });
 
-router.patch("/:id", (request, response) => {
+router.patch("/", (request, response) => {
   console.log("PATCH api/employee/");
   employeeApi.updateEmployee(request, response);
 });
 
-router.delete("/:id", (request, response) => {
-  console.log("DELETE api/employee/" + request.params.id);
+router.delete("/", (request, response) => {
+  console.log("DELETE api/employee/");
   employeeApi.deleteEmployee(request, response);
 });
 
