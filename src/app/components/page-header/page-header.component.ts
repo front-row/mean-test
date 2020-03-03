@@ -48,9 +48,13 @@ export class PageHeaderComponent implements OnInit
 		});
 	}
 	
-	onSubmit() 
+	signOut() 
 	{
 		this.http.post(this.apiUrl + 'signOut', {}).subscribe(response => console.log(response));
 		return this.router.navigate(['signin']);
+	}
+
+	backToMainMenu() {
+		this.router.navigate(['mainmenu']);
 	}
 }

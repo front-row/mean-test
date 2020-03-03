@@ -1,5 +1,4 @@
 <div class='headerBack'>
-	<form *ngIf="signedIn" [formGroup]="signOutButton" (ngSubmit)="onSubmit()">
-		<button class='button' type="submit">Sign Out</button>
-	</form>
+	<button class='button' (click)="signOut()">Sign Out</button>
+	<button class='button' (click)="backToMainMenu()">Back to Main Menu</button>
 </div>
