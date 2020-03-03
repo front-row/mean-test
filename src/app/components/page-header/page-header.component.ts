@@ -42,7 +42,7 @@ export class PageHeaderComponent implements OnInit
 			{
 				this.signedIn = true;
 			}
-			else {
+			else if(this.router.url.includes("signin") == false && this.router.url.includes("employeedetails/isInitial") == false) {
 				this.router.navigate(['signin']);
 			}
 		});
