@@ -9,6 +9,8 @@ export class MainMenuComponent implements OnInit {
 
   constructor() { }
 
+  manager = false; // is elevated user or manager
+
   ngOnInit(): void {
   }
 

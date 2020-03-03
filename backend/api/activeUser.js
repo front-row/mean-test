@@ -8,6 +8,7 @@ function handleError(response, message)
 	response.status(500).json({"error": message});
 }
 
+
 function logInEmployee(employee, response, request) {
 	ActiveUser.findOne({employeeId: employee.employeeId}, (err, activeUser) => {
 		if(err) {
@@ -65,12 +66,6 @@ module.exports = {
 	},
 
 	showAllLogins: (request, response) => {
-		ActiveUser.find({}, (err, logins) => {
-			if(err) {
-				handleError(response, err.message);
-			}
-			response.status(200);
-			response.send(logins);
-		})
+		ActiveUser.find({}, util.handleQuery(response));
 	}
 };
