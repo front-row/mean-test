@@ -5,7 +5,7 @@ export class Employee {
     password: string;
     active: boolean;
     employeeType: string;
-    displayId: number;
+    employeeId: number;
     isInitialEmployee: boolean;
     managerId: string;
     createdOn: Date;

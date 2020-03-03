@@ -3,33 +3,40 @@ const Employee = require("../models/employees.js");
 var session = require('express-session');
 const util = require('../util.js');
 
-module.exports = {
 
-	logInEmployee(employee, request, response) {
-		ActiveUser.findOne({employeeId: employee.employeeId}, (err, activeUser) => {
-			if(err) {
-				util.handleError(response, err.message);
-			}
-			if(activeUser) {
-				// TODO
-				console.log("Update the session token!");
+function logInEmployee(employee, request, response) {
+	ActiveUser.findOne({employeeId: employee.employeeId}, (err, activeUser) => {
+		if(err) {
+			util.handleError(response, err.message);
+		}
+		if(activeUser) {
+			activeUser.sessionId = request.session.id;
+			activeUser.save((err) => {
+				if(err) {
+					util.handleError(response, err.message);
+				}
+				request.session.employeeId = employee.employeeId;
+				request.session.isManager = employee.employeeType != "Cashier";
 				response.status(200);
 				response.send();
-				return;
-			}
-			else {
-				var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: request.session.id});
-				activeUser.save((err) => {
-					if(err) {
-						util.handleError(response, err.message);
-					}
-					response.status(200);
-					response.send();
-				})
-			}
-		})
-	},
+			})
+		}
+		else {
+			var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: request.session.id});
+			activeUser.save((err) => {
+				if(err) {
+					util.handleError(response, err.message);
+				}
+				request.session.employeeId = employee.employeeId;
+				request.session.isManager = employee.employeeType != "Cashier";
+				response.status(200);
+				response.send();
+			})
+		}
+	})
+}
 
+module.exports = {
 	signIn: (request, response) => {
 		var password = request.body.password;
 		var employeeId = request.body.employeeId;
@@ -47,7 +54,7 @@ module.exports = {
 				response.send("Incorrect password.");
 				return;
 			}
-			logInEmployee(employee, response, request);
+			logInEmployee(employee, request, response);
 		});
 	},
 	
@@ -59,25 +66,40 @@ module.exports = {
 	
 	signOut: (request, response) => {
 		request.session.destroy((err) => {});
-		ActiveUser.deleteOne({employeeID: request.body.employeeId}, (err, activeUser) => {
+		ActiveUser.deleteOne({employeeId: request.body.employeeId}, (err, activeUser) => {
 			if(err) {
 				util.handleError(response, err.message);
+			}
+			else {
+				response.status(200);
+				response.send();
 			}
 		});
 	},
 
 	isLoggedIn: (sessionId, response) => {
-		ActiveUser.findById(sessionId, (err, data) => {
+		ActiveUser.findOne({sessionId: sessionId}, (err, data) => {
 			if(err) {
 				util.handleError(response, err.message);
 			}
 			else {
-				response.status(200).send(data.length > 0);
+				response.status(200).send(data ? true : false);
 			}
 		});
 	},
 
 	showAllLogins: (request, response) => {
 		ActiveUser.find({}, util.handleQuery(response));
+	},
+
+	isManager: (request, response) => {
+		Employee.findOne({employeeId: request.session.employeeId}, (err, employee) => {
+			if(err) {
+				util.handleError(response, err.message);
+			}
+			else {
+				response.status(200).send(employee.employeeType != 'Cashier');
+			}
+		})
 	}
 };
