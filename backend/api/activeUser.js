@@ -9,31 +9,26 @@ function logInEmployee(employee, request, response) {
 		if(err) {
 			util.handleError(response, err.message);
 		}
+
 		if(activeUser) {
 			activeUser.sessionId = request.session.id;
-			activeUser.save((err) => {
-				if(err) {
-					util.handleError(response, err.message);
-				}
-				request.session.employeeId = employee.employeeId;
-				request.session.isManager = employee.employeeType != "Cashier";
-				response.status(200);
-				response.send();
-			})
+		} else {
+			var activeUser = new ActiveUser({
+					employeeId: employee.employeeId,
+					sessionId: request.session.id
+				});
 		}
-		else {
-			var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: request.session.id});
-			activeUser.save((err) => {
-				if(err) {
-					util.handleError(response, err.message);
-				}
-				request.session.employeeId = employee.employeeId;
-				request.session.isManager = employee.employeeType != "Cashier";
-				response.status(200);
-				response.send();
-			})
-		}
-	})
+
+		activeUser.save((err) => {
+			if(err) {
+				util.handleError(response, err.message);
+			}
+			request.session.employeeId = employee.employeeId;
+			request.session.isManager = employee.employeeType != "Cashier";
+			response.status(200).send();
+		});
+
+	});
 }
 
 module.exports = {
@@ -71,8 +66,7 @@ module.exports = {
 				util.handleError(response, err.message);
 			}
 			else {
-				response.status(200);
-				response.send();
+				response.status(200).send();
 			}
 		});
 	},
