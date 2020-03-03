@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'sign-in',
@@ -9,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   })
 
 export class SignInComponent {
+  private apiUrl = environment.baseUrl + '/api/auth/';
   signInForm = new FormGroup({
     id: new FormControl(''),
     password: new FormControl(''),
@@ -22,10 +24,10 @@ constructor(private http: HttpClient)
   {
     console.log('Signin request has been sent.');
     let login = {};
-    login['id'] = loginData.id;
+    login['employeeId'] = loginData.id;
     login['password'] = loginData.password;
 	console.log(login['id'] + " " + login['password']);
-    return this.http.post('**UNFINISHED**', login).subscribe(response => console.log(response));
+    return this.http.post('signin', login).subscribe(response => console.log(response));
   }
 }
 
