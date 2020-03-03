@@ -54,6 +54,10 @@ app.get('/session', function(req, res) {
   })
 })
 
+app.all('*', (req, res) => {
+  res.status(200).sendFile(__dirname + '/dist/index.html');
+});
+
 //Affirm connection to server
 app.listen(process.env.PORT || 8080, ()=>{
   var port = process.env.PORT || 8080;
