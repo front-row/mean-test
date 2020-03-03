@@ -39,11 +39,12 @@ module.exports = {
 			if(err) {
 				util.handleError(response, err.message);
 			}
-			if(!employee) {
+			if(employee == null) {
 				response.status(404);
 				response.send("EmployeeID " + employeeId + " not found.");
 				return;
 			}
+			console.log(employee);
 			if(employee.password !== password) {
 				response.status(401);
 				response.send("Incorrect password.");

@@ -60,20 +60,18 @@ export class SigninComponent implements OnInit{
     let login = {};
     login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
-    return this.http.post(this.apiUrl + '/signIn', login)
-      .subscribe((response: Response) => {
-        console.log(response);
-
+    return this.http.post(this.apiUrl + '/signIn', login, {observe: "response"})
+      .subscribe((response) => {
         if(response.status == 200){
           this.router.navigate(['mainmenu']);
-        } else if(response.status == 404) {
-          this.errorMsg = "Employee not found.";
-        } else if(response.status == 401) {
-          this.errorMsg = "Employee not found.";
-        } else if(response.status == 500) {
-          this.errorMsg = "Server error.";
         }
-
+      }, (err) => {
+        if(err.status == 404) {
+          this.errorMsg = "That employee ID does not exist";
+        }
+        else {
+          this.errorMsg = "Incorrect Password";
+        }
       });
   }
 }
