@@ -12,7 +12,7 @@ module.exports = {
 	//Find One Product
 	getProduct: (req, response) =>
 	{
-		Product.find({req}, util.handleQuery(response));
+		Product.findById(req.params.id, util.handleQuery(response));
 	},
 
 	//Add Product

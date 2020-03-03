@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -10,8 +10,7 @@ import { ProductService } from '../product.service';
   providers: [ProductService]
 })
 export class ProductDetailComponent implements OnInit {
-  id: string;
-  product: Product;
+  @Input() id: string;
   productDetailsForm: FormGroup;
 
   constructor(
@@ -27,7 +26,15 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    if(this.id) {
+      this.productService.getProduct(this.id)
+        .then((product: Product) => {
+          console.log(product);
+          this.productDetailsForm.controls["name"].setValue(product.name);
+          this.productDetailsForm.controls["lookupCode"].setValue(product.lookupCode);
+          this.productDetailsForm.controls["count"].setValue(product.count);
+        });
+    }
   }
 
   onSubmit(productData) {

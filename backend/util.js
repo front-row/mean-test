@@ -13,7 +13,7 @@ module.exports = {
 		
 		return function(err, data){
 			if(err) {
-				handleError(res, serr.message);
+				handleError(res, err.message);
 			}
 			else {
 				sendData(res, data);
