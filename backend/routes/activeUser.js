@@ -23,4 +23,9 @@ router.get("/debug/all", (request, response) => {
   activeUserApi.showAllLogins(request, response);
 })
 
+router.get("/isManager", (request, response) => {
+  console.log("GET api/auth/isManager for sessionId = " + request.sessionID);
+  activeUserApi.isManager(request, response);
+})
+
 module.exports = router;

@@ -65,10 +65,8 @@ module.exports = {
 	},
 	
 	signOut: (request, response) => {
-		console.log(request.session);
 		request.session.destroy((err) => {});
-		console.log("destroyed session?");
-		ActiveUser.deleteOne({employeeID: request.body.employeeId}, (err, activeUser) => {
+		ActiveUser.deleteOne({employeeId: request.body.employeeId}, (err, activeUser) => {
 			if(err) {
 				util.handleError(response, err.message);
 			}
@@ -85,7 +83,6 @@ module.exports = {
 				util.handleError(response, err.message);
 			}
 			else {
-				console.log(data ? true : false);
 				response.status(200).send(data ? true : false);
 			}
 		});
@@ -93,5 +90,16 @@ module.exports = {
 
 	showAllLogins: (request, response) => {
 		ActiveUser.find({}, util.handleQuery(response));
+	},
+
+	isManager: (request, response) => {
+		Employee.findOne({employeeId: request.session.employeeId}, (err, employee) => {
+			if(err) {
+				util.handleError(response, err.message);
+			}
+			else {
+				response.status(200).send(employee.employeeType != 'Cashier');
+			}
+		})
 	}
 };
