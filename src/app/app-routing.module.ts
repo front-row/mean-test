@@ -6,15 +6,16 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { ProductListingComponent } from './product/product-listing/product-listing.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'welcome',
+    redirectTo: 'signin',
     pathMatch: 'full'
   },
   {
-    path: 'welcome',
+    path: 'signin',
     component: SigninComponent
   },
   {
@@ -22,7 +23,15 @@ const routes: Routes = [
     component: MainMenuComponent
   },
   {
-    path: 'employeedetail',
+    path: 'employees',
+    component: EmployeeListComponent
+  },
+  {
+    path: 'employeedetails',
+    component: EmployeeDetailComponent
+  },
+  {
+    path: 'employeedetails/:id',
     component: EmployeeDetailComponent
   },
   {

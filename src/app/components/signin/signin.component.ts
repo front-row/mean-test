@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit{
-  private apiUrl = environment.baseUrl;
+  private apiUrl = environment.baseUrl + "/api/auth";
 
   signInForm = new FormGroup({
     employeeId: new FormControl(''),
@@ -35,12 +35,14 @@ export class SigninComponent implements OnInit{
 
   onSubmit(loginData) 
   {
-    console.log('Signin request has been sent.');
     let login = {};
     login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
-	console.log(login['id'] + " " + login['password']);
-    return this.http.post(this.apiUrl + '/signin', login).subscribe(response => console.log(response));
+    return this.http.post(this.apiUrl + '/signIn', login)
+      .subscribe((response: Response) => {
+        console.log(response);
+          this.router.navigate(['mainmenu']);
+      });
   }
 }
 
