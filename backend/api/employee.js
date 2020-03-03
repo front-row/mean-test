@@ -61,5 +61,11 @@ module.exports = {
 	// Delete record
 	deleteEmployee: (req, response) => {
 		Employee.deleteOne({employeeID: req.params.id}, util.handleQuery(response));
+	},
+
+	// Find One Employee by EmployeeId
+	getEmployeeById: (req, response, params) =>
+	{
+		Employee.findOne({employeeId: params.employeeId}, util.handleQuery(response));
 	}
 };

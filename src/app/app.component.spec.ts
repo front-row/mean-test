@@ -9,7 +9,6 @@ describe('AppComponent', () => {
 		],
       declarations: [
         AppComponent,
-		WelcomeComponent,
 		MainMenuComponent,
 		EmployeeDetailComponent,
 		ProductListingComponent,
