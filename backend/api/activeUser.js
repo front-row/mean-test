@@ -59,9 +59,9 @@ module.exports = {
 	},
 	
 	//Find One Active Employee By employeeID
-	getActiveEmployee: (request, response, params) =>
+	getActiveEmployee: (request, response) =>
 	{
-		Employee.find({employeeID: params.employeeID}, util.handleQuery(response));
+		Employee.findOne({employeeId: request.session.employeeId}, util.handleQuery(response));
 	},
 	
 	signOut: (request, response) => {
@@ -96,6 +96,9 @@ module.exports = {
 		Employee.findOne({employeeId: request.session.employeeId}, (err, employee) => {
 			if(err) {
 				util.handleError(response, err.message);
+			}
+			else if (!employee) {
+				response.status(200).send(false);
 			}
 			else {
 				response.status(200).send(employee.employeeType != 'Cashier');

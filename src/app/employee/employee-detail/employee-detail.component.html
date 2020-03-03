@@ -1,4 +1,7 @@
 <h1>Employee Details</h1>
+<div>
+  <p>Employee ID: {{employeeId}}</p>
+</div>
 <form [formGroup]="employeeDetailsForm" (ngSubmit)="onSubmit(employeeDetailsForm.value)">
   <div>
     <label for="firstName">First Name</label>
@@ -23,10 +26,6 @@
       <option>Shift Manager</option>
       <option>Cashier</option>
     </select>
-  </div>
-  <div>
-    <label for="employeeId">Display ID</label>
-    <input id="employeeId" type="number" formControlName="employeeId">
   </div>
   <button class="button" type="submit">Save</button>
 </form>

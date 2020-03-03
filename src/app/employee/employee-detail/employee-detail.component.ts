@@ -13,6 +13,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EmployeeDetailComponent implements OnInit {
   @Input() id: string;
   employeeDetailsForm: FormGroup;
+  employeeId: string;
+  isInitialEmployee: boolean;
 
   constructor(
     private employeeService: EmployeeService,
@@ -20,16 +22,16 @@ export class EmployeeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { 
-    debugger;
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.isInitialEmployee = this.activatedRoute.routeConfig.path.includes("isInitial");
     this.employeeDetailsForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
       password: '',
       verifyPassword: '',
       employeeType: '',
-      employeeId: null
     });
+    this.employeeId = "-"
   }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class EmployeeDetailComponent implements OnInit {
           this.employeeDetailsForm.controls["lastName"].setValue(employee.lastName);
           this.employeeDetailsForm.controls["password"].setValue(employee.password);
           this.employeeDetailsForm.controls["employeeType"].setValue(employee.employeeType);
-          this.employeeDetailsForm.controls["employeeId"].setValue(employee.employeeId);
+          this.employeeId = employee.employeeId.toString();
         })
     }
   }
@@ -51,12 +53,14 @@ export class EmployeeDetailComponent implements OnInit {
     e.lastName = employeeData.lastName;
     e.employeeType = employeeData.employeeType;
     e.password = employeeData.password;
-    e.employeeId = employeeData.employeeId;
     if(employeeData.password == employeeData.verifyPassword) {
       this.employeeService.addEmployee(e)
-        .then((result) => {
-          if(result) {
+        .then((result: Employee) => {
+          if(this.isInitialEmployee) {
             this.router.navigate(['/signin']);
+          }
+          else {
+            this.employeeId = result.employeeId.toString();
           }
         })
     }

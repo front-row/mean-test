@@ -31,6 +31,10 @@ const routes: Routes = [
     component: EmployeeDetailComponent
   },
   {
+    path: 'employeedetails/isInitial',
+    component: EmployeeDetailComponent
+  },
+  {
     path: 'employeedetails/:id',
     component: EmployeeDetailComponent
   },
