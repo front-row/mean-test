@@ -1,6 +1,9 @@
-<button>Start Transaction</button> 
-<button>Veiw Products</button>
+<button (click)="transaction()">Start Transaction</button> 
+<div id="ErrorTransaction" hidden><p>This functionality has not yet been implemented.</p></div> 
+<button (click)="products()">View Products</button>
 
-<button *ngIf="manager">Create Employee</button> 
-<button *ngIf="manager">Sales Report</button> 
-<button *ngIf="manager">Cashier Report</button> 
+<button *ngIf="manager" (click)="createEmployee()">Create Employee</button> 
+<button *ngIf="manager" (click)="salesReport()">Sales Report</button> 
+<div id="ErrorSales" hidden><p>This functionality has not yet been implemented.</p></div>
+<button *ngIf="manager" (click)="cashierReport()">Cashier Report</button> 
+<div id="ErrorCashier" hidden><p>This functionality has not yet been implemented.</p></div>

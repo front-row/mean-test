@@ -30,8 +30,12 @@ export class SigninComponent implements OnInit{
 
   onSubmit(signInData) 
   {
-    // TODO: Actually make this do a POST request I guess
-    console.log("Congrats this does nothing yet");
+    console.log('Signin request has been sent.');
+    let login = {};
+    login['employeeId'] = loginData.id;
+    login['password'] = loginData.password;
+	console.log(login['id'] + " " + login['password']);
+    return this.http.post(this.apiUrl + '/signin', login).subscribe(response => console.log(response));
   }
 }
 
