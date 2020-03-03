@@ -36,6 +36,6 @@ module.exports = {
 
 	// Delete product
 	deleteProduct: (req, response) => {
-		Product.deleteOne({productID: req.params.id}, util.handleQuery(response));
+		Product.deleteOne({_id: req.params.id}, util.handleQuery(response));
 	}
 };
