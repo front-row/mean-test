@@ -10,12 +10,17 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit{
+  private apiUrl = environment.baseUrl;
+
   signInForm = new FormGroup({
-    username: new FormControl(''),
-    psswd: new FormControl(''),
+    employeeId: new FormControl(''),
+    password: new FormControl(''),
   });
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ){}
 
   ngOnInit(): void {
     // get if user is signed in
@@ -28,11 +33,11 @@ export class SigninComponent implements OnInit{
 
 
 
-  onSubmit(signInData) 
+  onSubmit(loginData) 
   {
     console.log('Signin request has been sent.');
     let login = {};
-    login['employeeId'] = loginData.id;
+    login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
 	console.log(login['id'] + " " + login['password']);
     return this.http.post(this.apiUrl + '/signin', login).subscribe(response => console.log(response));
