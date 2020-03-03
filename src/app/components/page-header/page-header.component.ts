@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -13,7 +14,7 @@ export class PageHeaderComponent implements OnInit
 	private apiUrl = environment.baseUrl + '/api/auth/';
 	public signedIn = false;
 	signOutButton = new FormGroup({});
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient, private router: Router){}
 	ngOnInit(): void
 	{
 		this.http.get('getActiveEmployeeId').subscribe(response => {
@@ -29,6 +30,7 @@ export class PageHeaderComponent implements OnInit
 	onSubmit() 
 	{
 		console.log('Signout request has been sent.');
-		return this.http.get('signout').subscribe(response => console.log(response));
+		this.http.get('signout').subscribe(response => console.log(response));
+		return this.router.navigate(['signin']);
 	}
 }
