@@ -56,7 +56,7 @@ export class SigninComponent implements OnInit{
     this.noPassword = false;
     this.incorrectPassword = false;
 
-    if(!loginData.employeeId){
+    if(!loginData.employeeId || isNaN(loginData.employeeId)){
       this.noEmployeeID = true;
       return;
     }
