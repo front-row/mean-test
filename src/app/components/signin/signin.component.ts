@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'sign-in',
@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./signin.component.css']
   })
 
-export class SignInComponent {
+export class SigninComponent {
   private apiUrl = environment.baseUrl + '/api/auth/';
   signInForm = new FormGroup({
     id: new FormControl(''),
