@@ -35,12 +35,14 @@ export class SigninComponent implements OnInit{
 
   onSubmit(loginData) 
   {
-    console.log('Signin request has been sent.');
     let login = {};
     login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
-	console.log(login['id'] + " " + login['password']);
-    return this.http.post(this.apiUrl + '/signIn', login).subscribe(response => console.log(response));
+    return this.http.post(this.apiUrl + '/signIn', login)
+      .subscribe((response: Response) => {
+        console.log(response);
+          this.router.navigate(['mainmenu']);
+      });
   }
 }
 

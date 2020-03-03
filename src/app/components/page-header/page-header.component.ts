@@ -28,8 +28,7 @@ export class PageHeaderComponent implements OnInit
 	
 	onSubmit() 
 	{
-		console.log('Signout request has been sent.');
-		this.http.get(this.apiUrl + 'signout').subscribe(response => console.log(response));
+		this.http.post(this.apiUrl + 'signOut', {}).subscribe(response => console.log(response));
 		return this.router.navigate(['signin']);
 	}
 }
