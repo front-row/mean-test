@@ -18,6 +18,8 @@ export class SigninComponent implements OnInit{
     employeeId: new FormControl(''),
     password: new FormControl(''),
   });
+
+  errorMsg = null
   
   constructor(
     private employeeService: EmployeeService,
@@ -25,8 +27,6 @@ export class SigninComponent implements OnInit{
     private router: Router,
     private http: HttpClient
   ){}
-
-  errorMsg = null
 
   ngOnInit(): void {  
     this.employeeService.getEmployees()
@@ -43,18 +43,17 @@ export class SigninComponent implements OnInit{
       });
   }
 
-  onSubmit(loginData) 
-  {
+  onSubmit(loginData) {
 
     this.errorMsg = null;
 
     if(!loginData.employeeId || isNaN(loginData.employeeId)){
-      this.errorMsg = "Enter numeric employee ID";
+      this.errorMsg = "Enter numeric employee ID.";
       return;
     }
 
     if(!loginData.password){
-      this.errorMsg = "Enter password";
+      this.errorMsg = "Enter password.";
       return;
     }
 
