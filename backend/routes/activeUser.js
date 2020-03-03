@@ -28,4 +28,9 @@ router.get("/isManager", (request, response) => {
   activeUserApi.isManager(request, response);
 })
 
+router.get("/self", (request, response) => {
+  console.log("GET api/auth/self for sessionId = " + request.sessionID);
+  activeUserApi.getActiveEmployee(request, response);
+})
+
 module.exports = router;

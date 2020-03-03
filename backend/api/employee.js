@@ -9,15 +9,15 @@ module.exports = {
 	},
 
 	//Find One Employee By MongoDB ID
-	getEmployee: (req, response, params) =>
+	getEmployee: (req, response) =>
 	{
-		Employee.findById(params.id, util.handleQuery(response));
+		Employee.findById(req.params.id, util.handleQuery(response));
 	},
 	
 	//Find One Employee By employeeID
-	getEmployee: (req, response, params) =>
+	getEmployeeByEmployeeId: (req, response) =>
 	{
-		Employee.find({employeeID: params.employeeID}, util.handleQuery(response));
+		Employee.find({employeeId: req.params.employeeId}, util.handleQuery(response));
 	},
 
 	//Check if a employee is a Manager
@@ -43,12 +43,16 @@ module.exports = {
 	addEmployee: (req, response) =>
 	{
 		var data = req.body;
-		if(! data.manages) {
-			data.manages = [];
-		}
-		data.createdOn = Date.now();
 		var employee = new Employee(data);
-		employee.save(util.handleQuery(response));
+		Employee.find().sort({employeeId: -1}).limit(1).exec((err, employeeWithHighestEmployeeId) => {
+			if(employeeWithHighestEmployeeId.length > 0) {
+				employee.employeeId = employeeWithHighestEmployeeId[0].employeeId + 1;
+			}
+			else {
+				employee.employeeId = 1;
+			}
+			employee.save(util.handleQuery(response));
+		});
 	},
 
 
@@ -60,12 +64,11 @@ module.exports = {
 
 	// Delete record
 	deleteEmployee: (req, response) => {
-		Employee.deleteOne({employeeID: req.params.id}, util.handleQuery(response));
+		Employee.deleteOne({employeeId: req.params.id}, util.handleQuery(response));
 	},
 
-	// Find One Employee by EmployeeId
-	getEmployeeById: (req, response, params) =>
+	deleteAll: (request, response) =>
 	{
-		Employee.findOne({employeeId: params.employeeId}, util.handleQuery(response));
+		Employee.deleteMany({}, util.handleQuery(response));
 	}
 };

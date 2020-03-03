@@ -2,28 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from '../../services/user.service';
+import { Employee } from 'src/app/employee/employee';
 
 @Component({
   selector: 'main-menu',
   templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.css']
+  styleUrls: ['./main-menu.component.css'],
+  providers: [UserService]
 })
 export class MainMenuComponent implements OnInit {
   
   private apiUrl = environment.baseUrl;
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(
+    private userService: UserService,
+	  private router: Router,
+    private http: HttpClient
+	) { }
 
   manager = false; // is elevated user or manager
 
   ngOnInit(): void 
   {
-	  //TODO MAKE WORK
-	this.http.get(this.apiUrl + '/isManager').subscribe(response => {
-		if(response)
-		{
-			this.manager = true;
-		}			
-	});
+    this.userService.isManager()
+      .then((isManager: boolean) => {
+        this.manager = isManager;
+      })
   }
 
 	transaction()
@@ -36,8 +40,10 @@ export class MainMenuComponent implements OnInit {
 	}
 	createEmployee()
 	{
-		//TODO ROUTE THIS
-		return this.router.navigate(['**TODO**'])
+    this.userService.getCurrentEmployee()
+      .then((employee: Employee) => {
+        return this.router.navigate(['/employeedetails', employee._id]);
+      })
 	}
 	salesReport()
 	{

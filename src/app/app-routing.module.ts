@@ -19,6 +19,10 @@ const routes: Routes = [
     component: SigninComponent
   },
   {
+    path: 'signin/:employeeId',
+    component: SigninComponent
+  },
+  {
     path: 'mainmenu',
     component: MainMenuComponent
   },
@@ -28,6 +32,10 @@ const routes: Routes = [
   },
   {
     path: 'employeedetails',
+    component: EmployeeDetailComponent
+  },
+  {
+    path: 'employeedetails/isInitial',
     component: EmployeeDetailComponent
   },
   {

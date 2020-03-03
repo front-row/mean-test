@@ -1,8 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { EmployeeService } from 'src/app/employee/employee.service';
+import { Employee } from 'src/app/employee/employee';
 
 @Component({
   selector: 'sign-in',
@@ -18,17 +20,26 @@ export class SigninComponent implements OnInit{
   });
 
   constructor(
+    private employeeService: EmployeeService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private http: HttpClient
   ){}
 
-  ngOnInit(): void {
-    // get if user is signed in
-    var signedIn = true;
-    
-    if(!signedIn){
-      this.router.navigate(['employeedetail']);
-    }
+  ngOnInit(): void {  
+    this.employeeService.getEmployees()
+      .then((employees: Employee[]) => {
+        debugger;
+        if(employees.length == 0) {
+          this.router.navigate(['employeedetails', 'isInitial']);
+        }
+        else {
+          var employeeId = this.activatedRoute.snapshot.paramMap.get('employeeId');
+          if(employeeId) {
+            this.signInForm.controls["employeeId"].setValue(employeeId);
+          }
+        }
+      });
   }
 
 
