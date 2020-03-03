@@ -3,6 +3,4 @@
 	<label> Password: <input type="password" formControlName="password"> </label><br>
 	<button type="submit">Sign In</button>
 </form>
-<div *ngIf="noEmployeeID">Enter numeric employee ID</div>
-<div *ngIf="noPassword">Enter password</div>
-<div *ngIf="incorrectPassword">Incorrect password</div>
+<div *ngIf="errorMsg != null">{{ errorMsg }}</div>

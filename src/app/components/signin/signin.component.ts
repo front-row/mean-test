@@ -18,7 +18,6 @@ export class SigninComponent implements OnInit{
     employeeId: new FormControl(''),
     password: new FormControl(''),
   });
-
   
   constructor(
     private employeeService: EmployeeService,
@@ -27,10 +26,7 @@ export class SigninComponent implements OnInit{
     private http: HttpClient
   ){}
 
-  noEmployeeID = false;
-  noPassword = false;
-  incorrectPassword = false;
-  
+  errorMsg = null
 
   ngOnInit(): void {  
     this.employeeService.getEmployees()
@@ -47,22 +43,18 @@ export class SigninComponent implements OnInit{
       });
   }
 
-
-
   onSubmit(loginData) 
   {
 
-    this.noEmployeeID = false;
-    this.noPassword = false;
-    this.incorrectPassword = false;
+    this.errorMsg = null;
 
     if(!loginData.employeeId || isNaN(loginData.employeeId)){
-      this.noEmployeeID = true;
+      this.errorMsg = "Enter numeric employee ID";
       return;
     }
 
     if(!loginData.password){
-      this.noPassword = true;
+      this.errorMsg = "Enter password";
       return;
     }
 
@@ -75,9 +67,14 @@ export class SigninComponent implements OnInit{
 
         if(response.status == 200){
           this.router.navigate(['mainmenu']);
-        } else {
-          this.incorrectPassword = true;
+        } else if(response.status == 404) {
+          this.errorMsg = "Employee not found.";
+        } else if(response.status == 401) {
+          this.errorMsg = "Employee not found.";
+        } else if(response.status == 500) {
+          this.errorMsg = "Server error.";
         }
+
       });
   }
 }
