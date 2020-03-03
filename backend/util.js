@@ -10,7 +10,6 @@ function sendData(response, data) {
 
 module.exports = { 
 	handleQuery(res) {
-		
 		return function(err, data){
 			if(err) {
 				handleError(res, err.message);
@@ -19,6 +18,5 @@ module.exports = {
 				sendData(res, data);
 			}
 		}
-		
 	}
 }

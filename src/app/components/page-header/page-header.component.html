@@ -1,1 +1,5 @@
-<p>page-header works!</p>
+<div class='headerBack'>
+	<form *ngIf="signedIn"[formGroup]="signOutButton" (ngSubmit)="onSubmit()">
+		<button class='button' type="submit">Sign Out</button>
+	</form>
+</div>

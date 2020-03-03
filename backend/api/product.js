@@ -19,19 +19,13 @@ module.exports = {
 	addProduct: (req, response) =>
 	{
 		var product = new Product(req.body);
-		product.save((err, product) => {
-			if(err) {
-				handleError(response, err.message);
-			}
-			response.status(200);
-			response.send(product);
-		})
+		product.save(util.handleQuery(response));
 	},
 
 	//Update Product
 	updateProduct: (req, response) =>
 	{
-		Product.findByIdAndUpdate(req.params.id, req.body, util.handleQuery(response));
+		Product.findByIdAndUpdate(req.params.id, req.body, {runValidators: true, useFindAndModify: false},  util.handleQuery(response));
 	},
 
 	// Delete product
