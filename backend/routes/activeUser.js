@@ -9,8 +9,13 @@ router.post("/signIn", (request, response) => {
 });
 
 router.post("/signOut", (request, response) => {
-  console.log("POST api/auth/signIn/");
+  console.log("POST api/auth/signOut/");
   activeUserApi.signOut(request, response);
+});
+
+router.get("/getActiveEmployee", (request, response) => {
+  console.log("GET api/auth/getActiveEmployee/" + + request.params.employeeId);
+  activeUserApi.getActiveEmployee(request, response, request.params);
 });
 
 router.get("/debug/all", (request, response) => {
