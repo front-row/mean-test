@@ -17,7 +17,7 @@ router.get("/:employeeId", (request, response) => {
   employeeApi.getEmployeeById(request, response, request.params);
 });
 
-router.get("/:id/isManager", (request, response) => {
+router.get("/isManager", (request, response) => {
   console.log("GET api/employee/"+request.params.id+"/isManager");
   employeeApi.isEmployeeManager(request, response);
 })
