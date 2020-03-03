@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { EmployeeModule } from './employee/employee.module';
 import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
@@ -19,7 +18,6 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
     AppComponent,
 	  SigninComponent,
     MainMenuComponent,
-    EmployeeDetailComponent,
     ProductListingComponent,
     ProductDetailComponent,
     SigninComponent,
