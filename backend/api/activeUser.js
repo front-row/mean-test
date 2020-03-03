@@ -1,8 +1,15 @@
 const ActiveUser = require("../models/activeUser.js");
 const Employee = require("../models/employees.js");
-const util = require("../util.js")
+var session = require('express-session');
 
-function logInEmployee(employee, response) {
+function handleError(response, message)
+{
+	console.log("ERROR: " + message);
+	response.status(500).json({"error": message});
+}
+
+
+function logInEmployee(employee, response, request) {
 	ActiveUser.findOne({employeeId: employee.employeeId}, (err, activeUser) => {
 		if(err) {
 			handleError(response, err.message);
@@ -15,7 +22,7 @@ function logInEmployee(employee, response) {
 			return;
 		}
 		else {
-			var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: "0xDEADBEEF"});
+			var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: request.session.id});
 			activeUser.save((err) => {
 				if(err) {
 					handleError(response, err.message);
@@ -45,7 +52,16 @@ module.exports = {
 				response.send("Incorrect password.");
 				return;
 			}
-			logInEmployee(employee, response);
+			logInEmployee(employee, response, request);
+		});
+	},
+	
+	signOut: (request, response) => {
+		request.session.destroy((err) {});
+		ActiveUser.deleteOne({employeeID: request.body.employeeId}, (err, activeUser) => {
+			if(err) {
+				handleError(response, err.message);
+			}
 		});
 	},
 
