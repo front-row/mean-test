@@ -12,6 +12,11 @@ router.get("/:id", (request, response) => {
   employeeApi.getEmployee(request, response, request.params);
 });
 
+router.get("/:employeeId", (request, response) => {
+  console.log("GET api/employee/byId/" + request.params.employeeId);
+  employeeApi.getEmployeeById(request, response, request.params);
+});
+
 router.get("/:id/isManager", (request, response) => {
   console.log("GET api/employee/"+request.params.id+"/isManager");
   employeeApi.isEmployeeManager(request, response);
