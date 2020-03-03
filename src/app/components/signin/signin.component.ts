@@ -8,15 +8,14 @@ import { environment } from '../../../environments/environment';
   selector: 'sign-in',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
-
+})
 export class SigninComponent implements OnInit{
-  private apiUrl = environment.baseUrl + '/api/auth/';
   signInForm = new FormGroup({
-    id: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl(''),
+    psswd: new FormControl(''),
   });
 
-  constructor(private http: HttpClient, private router: Router){}
+  constructor(private router: Router){}
 
   ngOnInit(): void {
     // get if user is signed in
@@ -27,14 +26,12 @@ export class SigninComponent implements OnInit{
     }
   }
 
-  onSubmit(loginData) 
+
+
+  onSubmit() 
   {
-    console.log('Signin request has been sent.');
-    let login = {};
-    login['employeeId'] = loginData.id;
-    login['password'] = loginData.password;
-	console.log(login['id'] + " " + login['password']);
-    return this.http.post('signin', login).subscribe(response => console.log(response));
+    // TODO: Actually make this do a POST request I guess
+    console.log("Congrats this does nothing yet");
   }
 }
 
