@@ -1,22 +1,30 @@
-<button (click)="transaction()">Start Transaction</button> 
+<button mat-raised-button (click)="transaction()">Start Transaction</button> 
 <div id="ErrorTransaction" hidden>
     <p>This functionality has not yet been implemented.</p>
 </div>
+
+<br/> 
 <br/> 
 
-<button (click)="products()">View Products</button>
-<br/>
+<button mat-raised-button (click)="products()">View Products</button>
 
-<button *ngIf="manager" (click)="createEmployee()">View Employees</button>
-<br/>
+<br/> 
+<br/> 
 
-<button *ngIf="manager" (click)="salesReport()">Sales Report</button> 
+<button mat-raised-button *ngIf="manager" (click)="createEmployee()">View Employees</button>
+
+<br/>
+<br/>  
+
+<button mat-raised-button *ngIf="manager" (click)="salesReport()">Sales Report</button> 
 <div id="ErrorSales" hidden>
     <p>This functionality has not yet been implemented.</p>
 </div>
+
+<br/>
 <br/>
 
-<button *ngIf="manager" (click)="cashierReport()">Cashier Report</button> 
+<button mat-raised-button *ngIf="manager" (click)="cashierReport()">Cashier Report</button> 
 <div id="ErrorCashier" hidden>
     <p>This functionality has not yet been implemented.</p>
 </div>
