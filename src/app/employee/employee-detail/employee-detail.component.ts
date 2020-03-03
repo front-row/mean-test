@@ -22,6 +22,7 @@ export class EmployeeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { 
+    debugger;
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.isInitialEmployee = this.activatedRoute.routeConfig.path.includes("isInitial");
     this.employeeDetailsForm = this.formBuilder.group({
@@ -57,7 +58,8 @@ export class EmployeeDetailComponent implements OnInit {
       this.employeeService.addEmployee(e)
         .then((result: Employee) => {
           if(this.isInitialEmployee) {
-            this.router.navigate(['/signin']);
+            debugger;
+            this.router.navigate(['signin', result.employeeId]);
           }
           else {
             this.employeeId = result.employeeId.toString();

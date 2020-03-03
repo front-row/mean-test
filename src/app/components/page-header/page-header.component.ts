@@ -22,12 +22,6 @@ export class PageHeaderComponent implements OnInit
 		private http: HttpClient,
 		private router: Router
 	) {
-		this.employeeService.getEmployees()
-			.then((result: Employee[]) => {
-				if(result.length == 0) {
-					this.router.navigate(['/employeedetails']);
-				}
-			})
 	}
 
 	ngOnInit(): void

@@ -19,6 +19,10 @@ const routes: Routes = [
     component: SigninComponent
   },
   {
+    path: 'signin/:employeeId',
+    component: SigninComponent
+  },
+  {
     path: 'mainmenu',
     component: MainMenuComponent
   },
