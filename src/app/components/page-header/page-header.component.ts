@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -19,20 +19,33 @@ export class PageHeaderComponent implements OnInit
 	signOutButton = new FormGroup({});
 	constructor(
 		private employeeService: EmployeeService,
+		private activatedRoute: ActivatedRoute,
 		private http: HttpClient,
 		private router: Router
 	) {
+		this.router.events.subscribe((e) => {
+			if(e instanceof NavigationEnd) {
+				this.buildHeader();
+			}
+		})
 	}
 
 	ngOnInit(): void
 	{
+		this.buildHeader();
+	}
+
+	buildHeader() {
+		// Check if they're logged in.
 		this.http.get(this.apiUrl + 'isLoggedIn').subscribe(response => {
 			if(response)
 			{
 				this.signedIn = true;
 			}
+			else {
+				this.router.navigate(['signin']);
+			}
 		});
-		
 	}
 	
 	onSubmit() 
