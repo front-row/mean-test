@@ -42,7 +42,7 @@ export class MainMenuComponent implements OnInit {
 	{
     this.userService.getCurrentEmployee()
       .then((employee: Employee) => {
-        return this.router.navigate(['/employeedetails', employee._id]);
+        return this.router.navigate(['/employees']);
       })
 	}
 	salesReport()
