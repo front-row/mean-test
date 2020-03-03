@@ -19,6 +19,8 @@ export class SigninComponent implements OnInit{
     password: new FormControl(''),
   });
 
+  errorMsg = null
+  
   constructor(
     private employeeService: EmployeeService,
     private activatedRoute: ActivatedRoute,
@@ -29,7 +31,6 @@ export class SigninComponent implements OnInit{
   ngOnInit(): void {  
     this.employeeService.getEmployees()
       .then((employees: Employee[]) => {
-        debugger;
         if(employees.length == 0) {
           this.router.navigate(['employeedetails', 'isInitial']);
         }
@@ -42,17 +43,35 @@ export class SigninComponent implements OnInit{
       });
   }
 
+  onSubmit(loginData) {
 
+    this.errorMsg = null;
 
-  onSubmit(loginData) 
-  {
+    if(!loginData.employeeId || isNaN(loginData.employeeId)){
+      this.errorMsg = "Enter numeric employee ID.";
+      return;
+    }
+
+    if(!loginData.password){
+      this.errorMsg = "Enter password.";
+      return;
+    }
+
     let login = {};
     login['employeeId'] = loginData.employeeId;
     login['password'] = loginData.password;
-    return this.http.post(this.apiUrl + '/signIn', login)
-      .subscribe((response: Response) => {
-        console.log(response);
+    return this.http.post(this.apiUrl + '/signIn', login, {observe: "response"})
+      .subscribe((response) => {
+        if(response.status == 200){
           this.router.navigate(['mainmenu']);
+        }
+      }, (err) => {
+        if(err.status == 404) {
+          this.errorMsg = "That employee ID does not exist";
+        }
+        else {
+          this.errorMsg = "Incorrect Password";
+        }
       });
   }
 }
