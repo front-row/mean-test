@@ -21,7 +21,7 @@ module.exports = {
 	},
 
 	//Check if a employee is a Manager
-	isEmployeeManager: (req, response) =>
+	isManager: (req, response) =>
 	{
 		Employee.findById(req.params.id, (err, employee) =>
 		{

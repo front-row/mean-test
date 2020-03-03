@@ -13,9 +13,9 @@ router.post("/signOut", (request, response) => {
   activeUserApi.signOut(request, response);
 });
 
-router.get("/getActiveEmployee", (request, response) => {
-  console.log("GET api/auth/getActiveEmployee/" + + request.params.employeeId);
-  activeUserApi.getActiveEmployee(request, response, request.params);
+router.get("/isLoggedIn", (request, response) => {
+  console.log("GET /isLoggedIn" + request.sessionID);
+  activeUserApi.isLoggedIn(request.sessionID, response);
 });
 
 router.get("/debug/all", (request, response) => {
