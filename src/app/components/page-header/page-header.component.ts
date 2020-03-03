@@ -17,12 +17,11 @@ export class PageHeaderComponent implements OnInit
 	constructor(private http: HttpClient, private router: Router){}
 	ngOnInit(): void
 	{
-		this.http.get('getActiveEmployeeId').subscribe(response => {
-			if(!response)
+		this.http.get(this.apiUrl + 'isLoggedIn').subscribe(response => {
+			if(response)
 			{
-				signedIn = true;
+				this.signedIn = true;
 			}
-			
 		});
 		
 	}
@@ -30,7 +29,7 @@ export class PageHeaderComponent implements OnInit
 	onSubmit() 
 	{
 		console.log('Signout request has been sent.');
-		this.http.get('signout').subscribe(response => console.log(response));
+		this.http.get(this.apiUrl + 'signout').subscribe(response => console.log(response));
 		return this.router.navigate(['signin']);
 	}
 }
