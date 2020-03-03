@@ -7,19 +7,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeModule } from './employee/employee.module';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { SignInComponent } from './components/signin/signin.component';
+import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
-	SignInComponent,
+	  SigninComponent,
     MainMenuComponent,
     EmployeeDetailComponent,
     ProductListingComponent,

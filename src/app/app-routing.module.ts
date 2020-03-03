@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
 
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'welcome',
-    component: WelcomeComponent
+    component: SigninComponent
   },
   {
     path: 'mainmenu',
