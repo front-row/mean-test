@@ -73,7 +73,7 @@ export class SigninComponent implements OnInit{
       .subscribe((response: Response) => {
         console.log(response);
 
-        if(response){
+        if(response.status == 200){
           this.router.navigate(['mainmenu']);
         } else {
           this.incorrectPassword = true;
