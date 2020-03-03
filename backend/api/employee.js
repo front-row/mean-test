@@ -8,12 +8,19 @@ module.exports = {
 		Employee.find({}, util.handleQuery(response));
 	},
 
-	//Find One Employee
+	//Find One Employee By MongoDB ID
 	getEmployee: (req, response, params) =>
 	{
 		Employee.findById(params.id, util.handleQuery(response));
 	},
+	
+	//Find One Employee By employeeID
+	getEmployee: (req, response, params) =>
+	{
+		Employee.find({employeeID: params.employeeID}, util.handleQuery(response));
+	},
 
+	//Check if a employee is a Manager
 	isEmployeeManager: (req, response) =>
 	{
 		Employee.findById(req.params.id, (err, employee) =>
