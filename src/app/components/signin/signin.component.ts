@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SignInComponent {
+export class SigninComponent {
   signInForm = new FormGroup({
     username: new FormControl(''),
     psswd: new FormControl(''),
