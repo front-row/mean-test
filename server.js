@@ -47,6 +47,7 @@ const transactionRoutes = require("./backend/routes/transaction.js");
 
 app.use('/api/employee', employeeRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/transaction', transactionRoutes);
 app.use('/api/auth', signInRoutes);
 app.use('/api/transaction', transactionRoutes);
 
