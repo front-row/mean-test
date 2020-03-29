@@ -31,5 +31,9 @@ module.exports = {
 	// Delete product
 	deleteProduct: (req, response) => {
 		Product.deleteOne({_id: req.params.id}, util.handleQuery(response));
+	},
+
+	search: function(request, response) {
+		
 	}
 };
