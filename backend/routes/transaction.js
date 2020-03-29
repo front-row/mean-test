@@ -37,8 +37,8 @@ router.delete("/:t_id/:p_id/", (request, response) => {
   transactionApi.removeProduct(request, response);
 });
 
-router.patch("/:t_id/:p_id/", (request, response) => {
-  console.log("PATCH api/transaction/" + request.params.t_id + "/" + request.params.p_id);
+router.patch("/:t_id/:p_id/:new_quantity", (request, response) => {
+  console.log("PATCH api/transaction/" + request.params.t_id + "/" + request.params.p_id + "/" + request.params.new_quantity);
   transactionApi.editQuantity(request, response);
 });
 
