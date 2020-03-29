@@ -43,9 +43,11 @@ app.use(session({
 const employeeRoutes = require("./backend/routes/employee.js");
 const productRoutes = require("./backend/routes/product.js");
 const signInRoutes = require("./backend/routes/activeUser.js");
+const transactionRoutes = require("./backend/routes/transaction.js");
 
 app.use('/api/employee', employeeRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/transaction', transactionRoutes);
 app.use('/api/auth', signInRoutes);
 
 app.get('/session', function(req, res) {
