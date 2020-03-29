@@ -9,31 +9,26 @@ function logInEmployee(employee, request, response) {
 		if(err) {
 			util.handleError(response, err.message);
 		}
+
 		if(activeUser) {
 			activeUser.sessionId = request.session.id;
-			activeUser.save((err) => {
-				if(err) {
-					util.handleError(response, err.message);
-				}
-				request.session.employeeId = employee.employeeId;
-				request.session.isManager = employee.employeeType != "Cashier";
-				response.status(200);
-				response.send();
-			})
+		} else {
+			var activeUser = new ActiveUser({
+					employeeId: employee.employeeId,
+					sessionId: request.session.id
+				});
 		}
-		else {
-			var activeUser = new ActiveUser({employeeId: employee.employeeId, sessionId: request.session.id});
-			activeUser.save((err) => {
-				if(err) {
-					util.handleError(response, err.message);
-				}
-				request.session.employeeId = employee.employeeId;
-				request.session.isManager = employee.employeeType != "Cashier";
-				response.status(200);
-				response.send();
-			})
-		}
-	})
+
+		activeUser.save((err) => {
+			if(err) {
+				util.handleError(response, err.message);
+			}
+			request.session.employeeId = employee.employeeId;
+			request.session.isManager = employee.employeeType != "Cashier";
+			response.status(200).send();
+		});
+
+	});
 }
 
 module.exports = {
@@ -44,11 +39,12 @@ module.exports = {
 			if(err) {
 				util.handleError(response, err.message);
 			}
-			if(!employee) {
+			if(employee == null) {
 				response.status(404);
 				response.send("EmployeeID " + employeeId + " not found.");
 				return;
 			}
+			console.log(employee);
 			if(employee.password !== password) {
 				response.status(401);
 				response.send("Incorrect password.");
@@ -71,8 +67,7 @@ module.exports = {
 				util.handleError(response, err.message);
 			}
 			else {
-				response.status(200);
-				response.send();
+				response.status(200).send();
 			}
 		});
 	},

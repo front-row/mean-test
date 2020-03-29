@@ -3,6 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,20 +30,21 @@ import { HttpRequestInterceptor } from './HttpInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
-	  SigninComponent,
+	SigninComponent,
     MainMenuComponent,
     SigninComponent,
     PageHeaderComponent
   ],
   imports: [
     BrowserModule,
-	  ReactiveFormsModule,
+	ReactiveFormsModule,
     HttpClientModule,
     EmployeeModule,
-	  AppRoutingModule,
-	  BrowserModule,
+	AppRoutingModule,
+	BrowserModule,
     BrowserAnimationsModule,
     ProductModule,
+<<<<<<< HEAD
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
@@ -53,6 +56,10 @@ import { HttpRequestInterceptor } from './HttpInterceptor';
     MatTableModule,
     MatDividerModule,
     MatSnackBarModule
+=======
+	MatButtonModule,
+	MatCardModule
+>>>>>>> a15ca9d43ba8070791cc92d17942485b0e3fcbac
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
