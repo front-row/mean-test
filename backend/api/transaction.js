@@ -44,10 +44,10 @@ module.exports = {
 
 	// Add a product to transaction
 	addProduct: (req, response) => {
-		Transaction.findByIdAndUpdate(req.params.t_Id, {
+		Transaction.findByIdAndUpdate(req.params.t_id, {
 			$push: {
 				"transactions": {
-						"productId": req.params.p_Id, 
+						"productId": req.params.p_id, 
 						"count": req.body.count
 					}
 			}

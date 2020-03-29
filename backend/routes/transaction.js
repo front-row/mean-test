@@ -27,18 +27,18 @@ router.delete("/:id", (request, response) => {
   transactionApi.deleteTransaction(request, response);
 });
 
-router.post("/:t_Id/:p_Id/", (request, response) => {
-  console.log("POST api/transaction/" + request.params.t_Id + "/" + request.params.p_Id);
+router.post("/:t_id/:p_id/", (request, response) => {
+  console.log("POST api/transaction/" + request.params.t_id + "/" + request.params.p_id);
   transactionApi.addProduct(request, response);
 });
 
-router.delete("/:t_Id/:p_Id/", (request, response) => {
-  console.log("DELETE api/transaction/" + request.params.t_Id + "/" + request.params.p_Id);
+router.delete("/:t_id/:p_id/", (request, response) => {
+  console.log("DELETE api/transaction/" + request.params.t_id + "/" + request.params.p_id);
   transactionApi.removeProduct(request, response);
 });
 
-router.patch("/:t_Id/:p_Id/", (request, response) => {
-  console.log("PATCH api/transaction/" + request.params.t_Id + "/" + request.params.p_Id);
+router.patch("/:t_id/:p_id/", (request, response) => {
+  console.log("PATCH api/transaction/" + request.params.t_id + "/" + request.params.p_id);
   transactionApi.editQuantity(request, response);
 });
 
