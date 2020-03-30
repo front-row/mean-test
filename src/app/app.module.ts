@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,18 +14,7 @@ import { ProductModule } from './product/product.module';
 import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
-import { 
-  MatToolbarModule, 
-  MatFormFieldModule, 
-  MatInputModule, 
-  MatOptionModule, 
-  MatSelectModule, 
-  MatIconModule, 
-  MatButtonModule, 
-  MatCardModule, 
-  MatTableModule, 
-  MatDividerModule, 
-  MatSnackBarModule } from '@angular/material';
+
 import { HttpRequestInterceptor } from './HttpInterceptor';
 
 @NgModule({
@@ -44,22 +34,8 @@ import { HttpRequestInterceptor } from './HttpInterceptor';
 	BrowserModule,
     BrowserAnimationsModule,
     ProductModule,
-<<<<<<< HEAD
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatDividerModule,
-    MatSnackBarModule
-=======
 	MatButtonModule,
 	MatCardModule
->>>>>>> a15ca9d43ba8070791cc92d17942485b0e3fcbac
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
