@@ -38,30 +38,61 @@ module.exports = {
 	},
 
 	// Delete a Transaction
-	deleteTransaction: (req, response) => {
+	deleteTransaction: (req, response) =>
+	{
 		Transaction.deleteOne({_id: req.params.id}, util.handleQuery(response));
 	},
 
 	// Add a product to transaction
-	addProduct: (req, response) => {
+	addProduct: (req, response) =>
+	{
 		Transaction.findByIdAndUpdate(req.params.t_id, {
 			$push: {
 				"transactions": {
-						"productId": req.params.p_id, 
-						"count": req.body.count
-					}
+					"productId": req.params.p_id, 
+					"count": req.body.count
+				}
 			}
 		}, util.handleQuery(response))
 	},
 
 	// Remove a product from transaction
-	removeProduct: (req, response) => {
-
+	removeProduct: (req, response) =>
+	{
+		if(req.body.count > 0)
+		{
+			Transaction.findByIdAndUpdate(req.params.t_id, {
+				$set: {
+					"transactions": {
+						"productId": req.params.p_id,
+						"count": count - req.body.count
+					}
+				}
+			}, util.handleQuery(response))
+		}
+		else
+		{
+			Transaction.findByIdAndUpdate(req.params.t_id, {
+				$pull: {
+					"transactions": {
+						"productId": req.params.p_id,
+					}
+				}
+			}, util.handleQuery(response))
+		}
 	},
 
 	// Set number of products in transaction
-	editQuantity: (req, response) => {
-		
+	editQuantity: (req, response) =>
+	{
+		Transaction.findByIdAndUpdate(req.params.t_id, {
+				$set: {
+					"transactions": {
+						"productId": req.params.p_id,
+						"count": req.body.count
+					}
+				}
+			}, util.handleQuery(response))
 	}
 
 };
