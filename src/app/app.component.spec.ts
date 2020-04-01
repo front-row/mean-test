@@ -1,5 +1,11 @@
 import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
+import { ProductListingComponent } from './product/product-listing/product-listing.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,10 +15,10 @@ describe('AppComponent', () => {
 		],
       declarations: [
         AppComponent,
-		MainMenuComponent,
-		EmployeeDetailComponent,
-		ProductListingComponent,
-		ProductDetailComponent
+        MainMenuComponent,
+        EmployeeDetailComponent,
+        ProductListingComponent,
+        ProductDetailComponent
       ],
     }).compileComponents();
   }));

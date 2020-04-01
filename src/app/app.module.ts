@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { ProductModule } from './product/product.module';
 import { SigninComponent } from './components/signin/signin.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+
 import { HttpRequestInterceptor } from './HttpInterceptor';
 
 @NgModule({
