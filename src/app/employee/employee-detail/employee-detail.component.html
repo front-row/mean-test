@@ -1,7 +1,8 @@
-<h1>Employee Details</h1>
+<h1><b>EMPLOYEE DETAILS</b></h1>
 <div>
   <p>Employee ID: {{employeeId}}</p>
 </div>
+<!--
 <form [formGroup]="employeeDetailsForm" (ngSubmit)="onSubmit(employeeDetailsForm.value)">
   <div>
     <label for="firstName">First Name</label>
@@ -27,5 +28,40 @@
       <option>Cashier</option>
     </select>
   </div>
+  <button mat-raised-button class="button" type="submit">Save</button>
+</form>
+-->
+
+<form [formGroup]="employeeDetailsForm" (ngSubmit)="onSubmit(employeeDetailsForm.value)">
+	<mat-form-field>
+		<mat-label>First Name</mat-label>
+		<input matInput id="firstName" type="text" formControlName="firstName">
+	</mat-form-field>
+	<br>
+  	<mat-form-field>
+    	<mat-label for="lastName">Last Name</mat-label>
+    	<input matInput id="lastName" type="text" formControlName="lastName">
+	</mat-form-field>
+	<br>
+	<mat-form-field>	
+		<mat-label for="password">Password</mat-label>
+    	<input matInput id="password" type="password" formControlName="password">
+	</mat-form-field>
+	<br>
+	<mat-form-field>
+		<mat-label for="verifyPassword">Verify Password</mat-label>
+    	<input matInput id="verifyPassword" type="password" formControlName="verifyPassword">
+  	</mat-form-field>
+	<br>
+	<br>
+  	<mat-form-field>
+    	<mat-label for="employeeType">Employee Type</mat-label>
+		<mat-select id="employeeType" type="string" formControlName="employeeType">
+		  <mat-option>General Manager</mat-option>
+		  <mat-option>Shift Manager</mat-option>
+		  <mat-option>Cashier</mat-option>
+		</mat-select>
+	</mat-form-field>
+  <br>
   <button mat-raised-button class="button" type="submit">Save</button>
 </form>
