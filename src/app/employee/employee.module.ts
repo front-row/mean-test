@@ -4,13 +4,23 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [EmployeeDetailComponent, EmployeeListComponent],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+	MatButtonModule,
+	MatCardModule,
+	MatInputModule,
+	MatFormFieldModule,
+	MatSelectModule
   ],
   exports: [
     EmployeeDetailComponent,

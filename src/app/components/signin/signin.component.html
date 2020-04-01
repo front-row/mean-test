@@ -1,6 +1,26 @@
+<h1><b>SIGN IN</b></h1>
+
+<!--
 <form [formGroup]="signInForm" (ngSubmit)="onSubmit(signInForm.value)">
 	<label> Employee ID: <input type="number" formControlName="employeeId"> </label><br>
 	<label> Password: <input type="password" formControlName="password"> </label><br>
 	<button mat-raised-button type="submit">Sign In</button>
 </form>
+-->
+
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit(signInForm.value)">
+	<mat-form-field>
+		<mat-label>Employee ID:</mat-label>
+		<input matInput type="number" formControlName="employeeId">
+	</mat-form-field>
+	<br>
+	<mat-form-field>
+		<mat-label>Password:</mat-label>
+		<input matInput type="password" formControlName="password">
+	</mat-form-field>
+	<br>
+	<button mat-raised-button type="submit">Sign In</button>
+	<br>
+</form>
+
 <div *ngIf="errorMsg != null">{{ errorMsg }}</div>
