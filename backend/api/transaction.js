@@ -65,7 +65,7 @@ module.exports = {
 				$set: {
 					"transactions": {
 						"productId": req.params.p_id,
-						"count": count - req.body.count
+						"count": req.body.count
 					}
 				}
 			}, util.handleQuery(response))
