@@ -56,12 +56,19 @@ module.exports = {
 
 	// Remove a product from transaction
 	removeProduct: (req, response) => {
-
+		
 	},
 
 	// Set number of products in transaction
 	editQuantity: (req, response) => {
-		
+		Transaction.findByIdAndUpdate(req.params.t_id, {
+			$set: {
+				"transactions": {
+						"productId": req.params.p_id,
+						"count": req.params.new_quantity
+					}
+			}
+		}, util.handleQuery(response))
 	}
 
 };
