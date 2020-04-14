@@ -19,6 +19,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 import { HttpRequestInterceptor } from './HttpInterceptor';
+import { TransactionPageComponent } from './transaction/transaction-page/transaction-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpRequestInterceptor } from './HttpInterceptor';
 	SigninComponent,
     MainMenuComponent,
     SigninComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TransactionPageComponent
   ],
   imports: [
     BrowserModule,

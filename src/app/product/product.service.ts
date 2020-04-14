@@ -25,6 +25,13 @@ export class ProductService {
                .catch(this.handleError);
   }
 
+  searchProducts(search: string): Promise<void | Product[]>{
+    return this.http.get(this.apiUrl + 'search/' + search)
+               .toPromise()
+               .then(response => response as Product[])
+               .catch(this.handleError);
+  }
+
   addProduct(product: Product): Promise<void | Product> {
     return this.http.post(this.apiUrl, product)
                .toPromise()

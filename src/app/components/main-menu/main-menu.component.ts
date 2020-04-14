@@ -26,13 +26,14 @@ export class MainMenuComponent implements OnInit {
   {
     this.userService.isManager()
       .then((isManager: boolean) => {
-        this.manager = isManager;
+		this.manager = isManager;
       })
   }
 
 	transaction()
 	{
-		document.getElementById("ErrorTransaction").hidden = false;
+		return this.router.navigate(['transaction']);
+		//document.getElementById("ErrorTransaction").hidden = false;
 	}
 	products()
 	{

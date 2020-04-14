@@ -15,6 +15,7 @@ export class EmployeeDetailComponent implements OnInit {
   employeeDetailsForm: FormGroup;
   employeeId: string;
   isInitialEmployee: boolean;
+  employeeTypes: string[] = ["General Manager", "Shift Manager","Cashier"];
 
   constructor(
     private employeeService: EmployeeService,
@@ -22,7 +23,6 @@ export class EmployeeDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { 
-    debugger;
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.isInitialEmployee = this.activatedRoute.routeConfig.path.includes("isInitial");
     this.employeeDetailsForm = this.formBuilder.group({
@@ -58,7 +58,6 @@ export class EmployeeDetailComponent implements OnInit {
       this.employeeService.addEmployee(e)
         .then((result: Employee) => {
           if(this.isInitialEmployee) {
-            debugger;
             this.router.navigate(['signin', result.employeeId]);
           }
           else {

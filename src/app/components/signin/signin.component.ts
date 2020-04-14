@@ -67,7 +67,7 @@ export class SigninComponent implements OnInit{
         }
       }, (err) => {
         if(err.status == 404) {
-          this.errorMsg = "That employee ID does not exist";
+          this.errorMsg = "Employee ID does not exist";
         }
         else {
           this.errorMsg = "Incorrect Password";

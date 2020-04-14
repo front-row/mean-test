@@ -33,7 +33,12 @@ module.exports = {
 		Product.deleteOne({_id: req.params.id}, util.handleQuery(response));
 	},
 
-	search: function(request, response) {
-		
+	search: (searchTerm, response) => {
+		let regex = new RegExp(searchTerm, 'ig');
+   		
+		Product.find({ $or: [
+			{name: regex }, 
+			{lookupCode: regex},
+		]}, util.handleQuery(response));
 	}
 };

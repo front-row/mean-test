@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Transaction } from './transaction';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { ProductEntry } from '../transaction/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,15 @@ export class TransactionService {
                .catch(this.handleError);
   }
 
-  addTransaction(): Promise<void | Transaction> {
+  addEmptyTransaction(): Promise<void | Transaction> {
     return this.http.post(this.apiUrl, {})
+               .toPromise()
+               .then(response => response as Transaction)
+               .catch(this.handleError);
+  }
+
+  addTransaction(products: ProductEntry[]): Promise<void | Transaction> {
+    return this.http.post(this.apiUrl, {'products': products})
                .toPromise()
                .then(response => response as Transaction)
                .catch(this.handleError);

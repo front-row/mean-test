@@ -1,0 +1,50 @@
+<h1><b>New Transaction</b></h1>
+
+<div>
+    <mat-form-field>
+        <input matInput type="text" #search placeholder="search products" (change)='searchProducts(search.value)'>
+    </mat-form-field>
+</div>
+
+<div class='product-row' *ngFor="let product of searchResults" class="group">
+  <button mat-raised-button (click)='addProduct(product)' class='add-cart'>Add to Cart</button>
+  <b>{{product.name}}</b>  ${{product.price}}<br>
+  Product Code: {{product.lookupCode}} 
+  <br>
+  <br>
+</div>
+
+<div *ngIf="showElip" class="group">
+  <button style="visibility:hidden" mat-raised-button class='add-cart'>Add to Cart</button>
+  <b>...</b><br>
+  <br>
+  <br>
+</div>
+
+<div *ngIf="showErr" class="group">
+  No search results! Try broadening your search.
+</div>
+
+<br>
+
+<mat-card>
+  <h2><b>Cart</b></h2>
+  <div class='product-row' *ngFor="let entry of cart" class="group">
+    <div class="float-right">
+      <button mat-raised-button (click)='removeProduct(entry.product)' class='add-cart'>Remove</button>
+      <mat-form-field [style.width.px]=30>
+        <input matInput class="prod-count" type="text" #modCount value="{{entry.count}}" (change)='setProductCount(entry.product, modCount.value)'>
+      </mat-form-field>
+    </div>
+    
+    <b>{{entry.product.name}}</b>  ${{entry.product.price}}<br>
+    Product Code: {{entry.product.lookupCode}} 
+    <br>
+    <br>
+  </div>
+</mat-card>
+
+<br>
+<br>
+<button mat-raised-button (click)='submit()'>Submit Transaction</button>
+<button mat-raised-button (click)='cancel()'>Cancel Transaction</button>

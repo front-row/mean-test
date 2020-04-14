@@ -1,4 +1,5 @@
 const Transaction = require('../models/transactions.js');
+const Product = require('../models/products.js');
 const util = require('../util.js');
 
 
