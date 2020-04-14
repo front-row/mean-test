@@ -19,16 +19,7 @@ module.exports = {
 	addTransaction: (req, response) =>
 	{
 		var transaction = new Transaction(req.body);
-		Transaction.find().sort({transactionId: -1}).limit(1).exec((err, transactionWithHighestId) => {
-			if(transactionWithHighestId.length > 0) {
-				transaction.transactionId = transactionWithHighestId[0].transactionId + 1;
-			}
-			else {
-				transaction.transactionId = 1;
-			}
-			transaction.save(util.handleQuery(response));
-		});
-
+		transaction.save(util.handleQuery(response));
 	},
 
 	//Update Transaction
@@ -46,12 +37,12 @@ module.exports = {
 	addProduct: (req, response) => {
 		Transaction.findByIdAndUpdate(req.params.t_id, {
 			$push: {
-				"transactions": {
+				"products": {
 						"productId": req.params.p_id, 
 						"count": req.body.count
 					}
 			}
-		}, util.handleQuery(response))
+		}, {useFindAndModify: false}, util.handleQuery(response))
 	},
 
 	// Remove a product from transaction

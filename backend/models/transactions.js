@@ -3,12 +3,7 @@ const Product = require('./products.js');
 
 // Just an initial prototype. Make changes as needed.
 const TransactionSchema = mongoose.Schema({
-        transactionId: {
-            type: Number,
-            required: true,
-            unique: true
-        },
-        transactions: [
+        products: [
             {
                 productId: {
                     type: mongoose.Schema.Types.ObjectId,
