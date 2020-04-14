@@ -35,24 +35,28 @@ module.exports = {
 
 	// Add a product to transaction
 	addProduct: (req, response) => {
-		Transaction.findByIdAndUpdate(req.params.t_id, {
-			$push: {
-				"products": {
-						"productId": req.params.p_id, 
-						"count": req.body.count
-					}
+		Transaction.findById(req.params.t_id).exec(function(err, transaction) {
+			if(err) {
+				response.status(500).send(err);
+				return;
 			}
-		}, {useFindAndModify: false}, util.handleQuery(response))
+			var productAlreadyAdded = false;
+			for(var i = 0; i < transaction.products.length; i++) {
+				var productEntry = transaction.products[i]
+				if(productEntry.productId == req.params.p_id) {
+					productEntry.count = req.body.count; // set the count and move on
+					productAlreadyAdded = true;
+				}
+			}
+			if(productAlreadyAdded == false) {
+				transaction.products.push({productId: req.params.p_id, count: req.body.count ? req.body.count : 1});
+			}
+			transaction.save({}, util.handleQuery(response));
+		})
 	},
 
 	// Remove a product from transaction
 	removeProduct: (req, response) => {
-
-	},
-
-	// Set number of products in transaction
-	editQuantity: (req, response) => {
 		
 	}
-
 };
