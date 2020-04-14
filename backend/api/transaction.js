@@ -29,12 +29,14 @@ module.exports = {
 	},
 
 	// Delete a Transaction
-	deleteTransaction: (req, response) => {
+	deleteTransaction: (req, response) =>
+	{
 		Transaction.deleteOne({_id: req.params.id}, util.handleQuery(response));
 	},
 
 	// Add a product to transaction
-	addProduct: (req, response) => {
+	addProduct: (req, response) => 
+	{
 		Transaction.findById(req.params.t_id).exec(function(err, transaction) {
 			if(err) {
 				response.status(500).send(err);
@@ -56,7 +58,22 @@ module.exports = {
 	},
 
 	// Remove a product from transaction
-	removeProduct: (req, response) => {
-		
+	removeProduct: (req, response) => 
+	{
+		Transaction.findById(req.params.t_id).exec(function(err, transaction) {
+			if(err) {
+				response.status(500).send(err);
+				return;
+			}
+			var newProducts = [];
+			for(var i = 0; i < transaction.products.length; i++) {
+				var productEntry = transaction.products[i];
+				if(productEntry.productId != req.params.p_id) {
+					newProducts.push(productEntry);
+				}
+			}
+			transaction.products = newProducts;
+			transaction.save({}, util.handleQuery(response));
+		});
 	}
 };
