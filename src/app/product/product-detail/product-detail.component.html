@@ -15,3 +15,27 @@
     <button *ngIf="isManager" class="button" type="submit">Save</button>
 </form>
 <button mat-raised-button *ngIf="isManager" class="button" (click)="deleteClicked()">Delete</button>
+
+<!--
+<h1><b>PRODUCT DETAILS</b></h1>
+<form [formGroup]="productDetailsForm" (ngSubmit)="onSubmit(productDetailsForm.value)">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput id="name" type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Lookup Code</mat-label>
+        <input matInput id="lookupCode" type="text" formControlName="lookupCode">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Count</mat-label>
+        <input matInput id="count" type="number" formControlName="count">
+    </mat-form-field>
+	<mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput id="price" type="number" formControlName="price">
+	</mat-form-field>
+    <button mat-raised-button *ngIf="isManager" class="button" type="submit">Save</button>
+</form>
+<button mat-raised-button *ngIf="isManager" class="button" (click)="deleteClicked()">Delete</button>
+-->

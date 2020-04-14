@@ -36,6 +36,7 @@ export class ProductDetailComponent implements OnInit {
           this.productDetailsForm.controls["name"].enable();
           this.productDetailsForm.controls["lookupCode"].enable();
           this.productDetailsForm.controls["count"].enable();
+		  this.productDetailsForm.controls["price"].enable();
         }
       });
   }
@@ -48,6 +49,7 @@ export class ProductDetailComponent implements OnInit {
           this.productDetailsForm.controls["name"].setValue(product.name);
           this.productDetailsForm.controls["lookupCode"].setValue(product.lookupCode);
           this.productDetailsForm.controls["count"].setValue(product.count);
+		  this.productDetailsForm.controls["price"].setValue(product.price);
         });
     }
   }

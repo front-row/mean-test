@@ -3,4 +3,5 @@ export class Product {
     name: string;
     lookupCode: number;
     count: number;
+	price: number;
 }

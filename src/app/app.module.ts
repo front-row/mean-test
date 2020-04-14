@@ -44,6 +44,12 @@ import { TransactionPageComponent } from './transaction/transaction-page/transac
 	MatInputModule,
 	MatFormFieldModule
   ],
+  exports: [
+    MatButtonModule,
+	MatCardModule,
+	MatInputModule,
+	MatFormFieldModule
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true }
   ],
