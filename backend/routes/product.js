@@ -29,7 +29,7 @@ router.delete("/:id", (request, response) => {
 
 router.get("/search/:term", (request, response) => {
   console.log("GET /api/product/search/" + request.params.term);
-  productApi.search(request, response);
+  productApi.search(request.params.term, response);
 });
 
 module.exports = router;

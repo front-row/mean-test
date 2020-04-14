@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Product = require('./products.js');
 
 // child schema that stores the products and counts
-var productEntrySchema = mongoose.Schema({
+var ProductEntrySchema = mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
@@ -17,7 +17,7 @@ var productEntrySchema = mongoose.Schema({
 
 // Just an initial prototype. Make changes as needed.
 const TransactionSchema = mongoose.Schema({
-        products: [productEntrySchema]
+        products: [ProductEntrySchema]
 });
 
 const Transaction = module.exports = mongoose.model('Transaction', TransactionSchema);

@@ -1,0 +1,15 @@
+.product-row, .float-right, .prod-count{
+    height: 25px;
+}
+.add-cart, .float-right{
+    float: right;
+}
+
+.prod-count{
+    width:20px !important;
+    height:auto;
+}
+
+.form-height{
+    height:auto;
+}

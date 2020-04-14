@@ -7,6 +7,8 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { ProductListingComponent } from './product/product-listing/product-listing.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { TransactionPageComponent } from './transaction/transaction-page/transaction-page.component';
+
 
 const routes: Routes = [
   {
@@ -53,7 +55,16 @@ const routes: Routes = [
   {
     path: 'productdetails/:id',
     component: ProductDetailComponent
+  },
+  {
+    path: 'transaction',
+    component: TransactionPageComponent
+  },
+  {
+    path: 'transaction/:id',
+    component: TransactionPageComponent
   }
+
 ];
 
 @NgModule({

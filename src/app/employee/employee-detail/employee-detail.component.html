@@ -57,11 +57,13 @@
   	<mat-form-field>
     	<mat-label for="employeeType">Employee Type</mat-label>
 		<mat-select id="employeeType" type="string" formControlName="employeeType">
-		  <mat-option>General Manager</mat-option>
-		  <mat-option>Shift Manager</mat-option>
-		  <mat-option>Cashier</mat-option>
+		  <mat-option *ngFor="let type of employeeTypes" [value]="type">
+			  {{type}}
+		  </mat-option>
 		</mat-select>
 	</mat-form-field>
+	<br>
   <br>
   <button mat-raised-button class="button" type="submit">Save</button>
+  <br>
 </form>

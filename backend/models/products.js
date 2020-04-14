@@ -11,7 +11,7 @@ const ProductSchema = mongoose.Schema({
         required: true
     },
     lookupCode:{
-        type: Number,
+        type: String, //  to enable searching with regex
         required: true,
         unique: true
     },
