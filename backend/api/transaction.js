@@ -19,16 +19,7 @@ module.exports = {
 	addTransaction: (req, response) =>
 	{
 		var transaction = new Transaction(req.body);
-		Transaction.find().sort({transactionId: -1}).limit(1).exec((err, transactionWithHighestId) => {
-			if(transactionWithHighestId.length > 0) {
-				transaction.transactionId = transactionWithHighestId[0].transactionId + 1;
-			}
-			else {
-				transaction.transactionId = 1;
-			}
-			transaction.save(util.handleQuery(response));
-		});
-
+		transaction.save(util.handleQuery(response));
 	},
 
 	//Update Transaction
@@ -38,30 +29,51 @@ module.exports = {
 	},
 
 	// Delete a Transaction
-	deleteTransaction: (req, response) => {
+	deleteTransaction: (req, response) =>
+	{
 		Transaction.deleteOne({_id: req.params.id}, util.handleQuery(response));
 	},
 
 	// Add a product to transaction
-	addProduct: (req, response) => {
-		Transaction.findByIdAndUpdate(req.params.t_id, {
-			$push: {
-				"transactions": {
-						"productId": req.params.p_id, 
-						"count": req.body.count
-					}
+	addProduct: (req, response) => 
+	{
+		Transaction.findById(req.params.t_id).exec(function(err, transaction) {
+			if(err) {
+				response.status(500).send(err);
+				return;
 			}
-		}, util.handleQuery(response))
+			var productAlreadyAdded = false;
+			for(var i = 0; i < transaction.products.length; i++) {
+				var productEntry = transaction.products[i]
+				if(productEntry.productId == req.params.p_id) {
+					productEntry.count = req.body.count; // set the count and move on
+					productAlreadyAdded = true;
+				}
+			}
+			if(productAlreadyAdded == false) {
+				transaction.products.push({productId: req.params.p_id, count: req.body.count ? req.body.count : 1});
+			}
+			transaction.save({}, util.handleQuery(response));
+		})
 	},
 
 	// Remove a product from transaction
-	removeProduct: (req, response) => {
-
-	},
-
-	// Set number of products in transaction
-	editQuantity: (req, response) => {
-		
+	removeProduct: (req, response) => 
+	{
+		Transaction.findById(req.params.t_id).exec(function(err, transaction) {
+			if(err) {
+				response.status(500).send(err);
+				return;
+			}
+			var newProducts = [];
+			for(var i = 0; i < transaction.products.length; i++) {
+				var productEntry = transaction.products[i];
+				if(productEntry.productId != req.params.p_id) {
+					newProducts.push(productEntry);
+				}
+			}
+			transaction.products = newProducts;
+			transaction.save({}, util.handleQuery(response));
+		});
 	}
-
 };

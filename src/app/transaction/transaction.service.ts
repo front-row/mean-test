@@ -40,7 +40,7 @@ export class TransactionService {
   }
 
   addProduct(transactionId: string, productId: string, quantity: Number): Promise<void | Transaction> {
-    return this.http.post(this.apiUrl + transactionId + "/" + productId, { "quantity": quantity })
+    return this.http.post(this.apiUrl + transactionId + "/" + productId, { "count": quantity })
                .toPromise()
                .then(response => response as Transaction)
                .catch(this.handleError);
@@ -54,10 +54,7 @@ export class TransactionService {
   }
 
   editProductCount(transactionId: string, productId: string, quantity): Promise<void | Transaction> {
-    return this.http.patch(this.apiUrl + transactionId + "/" + productId, { "quantity": quantity })
-               .toPromise()
-               .then(response => response as Transaction)
-               .catch(this.handleError);
+    return this.addProduct(transactionId, productId, quantity);
   }
 
   private handleError(error: any) {
