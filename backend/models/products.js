@@ -14,7 +14,13 @@ const ProductSchema = mongoose.Schema({
         type: Number,
         required: true,
         unique: true
-    }
+    },
+	price:{
+		type: Number,
+		required: true,
+		min: 0,
+		default: 0
+	}
 });
 
 const Product = module.exports = mongoose.model('Product', ProductSchema);
