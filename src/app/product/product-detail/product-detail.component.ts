@@ -4,6 +4,7 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'product-detail-t',
@@ -26,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.productDetailsForm = this.formBuilder.group({
       lookupCode: new FormControl({value: '', disabled: true}),
+      price: new FormControl({value: '', disabled: true}),
       name: new FormControl({value: '', disabled: true}),
       count: new FormControl({value: '', disabled: true})
     });
@@ -36,7 +38,7 @@ export class ProductDetailComponent implements OnInit {
           this.productDetailsForm.controls["name"].enable();
           this.productDetailsForm.controls["lookupCode"].enable();
           this.productDetailsForm.controls["count"].enable();
-		  this.productDetailsForm.controls["price"].enable();
+		      this.productDetailsForm.controls["price"].enable();
         }
       });
   }

@@ -18,6 +18,7 @@ export class TransactionPageComponent implements OnInit {
   searchResults: Product[];
   cart; // array of javascript objects with Product and count fields
   total; //total price of transaction.
+  itemCount; //total number of items in transaction.
   showErr: Boolean;
   showElip: Boolean;
   
@@ -37,6 +38,7 @@ export class TransactionPageComponent implements OnInit {
     this.searchResults = [];
     this.showErr = false;
     this.showElip = false;
+    this.update();
   }
 
 
@@ -110,7 +112,8 @@ export class TransactionPageComponent implements OnInit {
   }
   
   update(){
-	this.total = this.getPrice();
+  this.total = this.getPrice();
+  this.itemCount = this.cart.length;
   }
   
   getPrice(){
