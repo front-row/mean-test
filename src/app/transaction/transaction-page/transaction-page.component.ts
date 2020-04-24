@@ -17,6 +17,8 @@ export class TransactionPageComponent implements OnInit {
   private productIDs: string[]; // to easily keep track of which products are in cart
   searchResults: Product[];
   cart; // array of javascript objects with Product and count fields
+  total; //total price of transaction.
+  itemCount; //total number of items in transaction.
   showErr: Boolean;
   showElip: Boolean;
   
@@ -36,6 +38,7 @@ export class TransactionPageComponent implements OnInit {
     this.searchResults = [];
     this.showErr = false;
     this.showElip = false;
+    this.update();
   }
 
 
@@ -45,7 +48,9 @@ export class TransactionPageComponent implements OnInit {
       let entry = {}
       entry['product'] = product;
       entry['count'] = 1;
+	  entry['price'] = product.price;
       this.cart.push(entry);
+	  this.update();
     }
   }
 
@@ -64,6 +69,7 @@ export class TransactionPageComponent implements OnInit {
 
       // Note this is a REALLY BAD way to do this, should probably this.productIDs a dictonary
       this.productIDs.splice(this.productIDs.indexOf(product._id), 1);
+	  this.update();
     }
   }
 
@@ -74,6 +80,7 @@ export class TransactionPageComponent implements OnInit {
         break;
       }
     }
+	this.update();
   }
 
   searchProducts(search: string){
@@ -102,6 +109,19 @@ export class TransactionPageComponent implements OnInit {
     this.transactionService.addTransaction(entries);
     this.setup();
     return false;
+  }
+  
+  update(){
+  this.total = this.getPrice();
+  this.itemCount = this.cart.length;
+  }
+  
+  getPrice(){
+	 let totalPrice = 0;
+	 this.cart.forEach(function(item) {
+		 totalPrice += item.product.price * item.product.count;
+	 });
+	 return totalPrice;
   }
 
   cancel(){

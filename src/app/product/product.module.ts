@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProductListingComponent } from './product-listing/product-listing.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -11,11 +13,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    MatInputModule,
+  	MatFormFieldModule,
     ReactiveFormsModule
   ],
   exports: [
     ProductListingComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    MatInputModule,
+	  MatFormFieldModule
   ]
 })
 export class ProductModule { }
