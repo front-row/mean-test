@@ -61,6 +61,7 @@ export class ProductDetailComponent implements OnInit {
     p.name = productData.name;
     p.count = productData.count;
     p.lookupCode = productData.lookupCode;
+    p.price = productData.price;
     if(this.id) {
       this.productService.updateProduct(this.id, p)
         .then((result) => {

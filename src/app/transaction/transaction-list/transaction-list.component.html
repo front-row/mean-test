@@ -1,0 +1,7 @@
+<h1>All Transactions</h1>
+
+<ul>
+    <li *ngFor="let transaction of transactions">
+        <a class="button" href="/transactionview/{{transaction._id}}">{{transaction._id}}</a>
+    </li>
+</ul>

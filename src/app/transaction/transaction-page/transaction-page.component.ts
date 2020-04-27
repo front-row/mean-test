@@ -119,7 +119,7 @@ export class TransactionPageComponent implements OnInit {
   getPrice(){
 	 let totalPrice = 0;
 	 this.cart.forEach(function(item) {
-		 totalPrice += item.product.price * item.product.count;
+		 totalPrice += item.product.price * item.count;
 	 });
 	 return totalPrice;
   }

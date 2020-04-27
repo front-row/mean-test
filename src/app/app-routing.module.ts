@@ -8,6 +8,8 @@ import { ProductListingComponent } from './product/product-listing/product-listi
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { TransactionPageComponent } from './transaction/transaction-page/transaction-page.component';
+import { TransactionListComponent } from './transaction/transaction-list/transaction-list.component';
+import { TransactionViewComponent } from './transaction/transaction-view/transaction-view.component';
 
 
 const routes: Routes = [
@@ -63,8 +65,15 @@ const routes: Routes = [
   {
     path: 'transaction/:id',
     component: TransactionPageComponent
+  },
+  {
+    path: 'transactions',
+    component: TransactionListComponent
+  },
+  {
+    path: 'transactionview/:id',
+    component: TransactionViewComponent
   }
-
 ];
 
 @NgModule({
