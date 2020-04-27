@@ -1,0 +1,19 @@
+<h1>Transaction {{id}}</h1>
+<hr>
+<h3>Products</h3>
+<table style="width: 100%">
+    <thead>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pe of transaction.productEntries">
+            <td>
+                <a href="/productdetails/{{pe.productId}}">{{pe.product.name}}</a>
+            </td>
+            <td>${{pe.product.price}}</td>
+            <td>{{pe.count}}</td>
+        </tr>
+    </tbody>
+</table>
