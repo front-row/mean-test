@@ -30,14 +30,14 @@
 <mat-card>
   <h2><b>Cart</b></h2>
   <div class="priceamt_row">
-	<h4>Total Price of Cart: ${{total}} over ${{itemCount}} items.</h4>
+	<h4>Total Price of Cart: ${{total}} over {{itemCount}} items.</h4>
   </div>
   <div class='product-row' *ngFor="let entry of cart" class="group">
     <div class="float-right">
       <button mat-raised-button (click)='removeProduct(entry.product)' class='add-cart'>Remove</button>
-	  <label>Price: ${{entry.product.price}}</label>	
-      <mat-form-field [style.width.px]=30>
-        <input matInput class="prod-count" type="text" #modCount value="{{entry.count}}" (change)='setProductCount(entry.product, modCount.value)'>
+	    <label>Count:</label>	
+      <mat-form-field [style.width.px]=50>
+        <input matInput class="prod-count" type="number" min="1" #modCount value="{{entry.count}}" (change)='setProductCount(entry.product, modCount.value)'>
       </mat-form-field>
     </div>
     
