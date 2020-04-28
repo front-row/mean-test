@@ -116,16 +116,16 @@ export class TransactionPageComponent implements OnInit {
     this.itemCount = 0;
     for (let entry of this.cart)
 	  {
-		  this.itemCount += entry.count;
-  	}
+		  this.itemCount += parseInt(entry.count);
+    }
   }
   
   getPrice(){
 	 let totalPrice = 0;
 	 this.cart.forEach(function(item) {
 		 totalPrice += item.product.price * item.count;
-	 });
-	 return totalPrice;
+   });
+	 return totalPrice.toFixed(2);
   }
 
   cancel(){
