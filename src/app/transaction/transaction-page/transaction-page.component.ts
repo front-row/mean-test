@@ -113,7 +113,11 @@ export class TransactionPageComponent implements OnInit {
   
   update(){
   this.total = this.getPrice();
-  this.itemCount = this.cart.length;
+  itemCount = 0;
+  for (let entry of this.cart)
+	{
+		itemCount += entry.count;
+	}
   }
   
   getPrice(){
